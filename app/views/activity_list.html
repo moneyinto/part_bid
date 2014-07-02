@@ -1,0 +1,16 @@
+<header class="header" style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #0079c8), color-stop(1, #0067b6))">
+    活动列表
+    <button class="btn btn-primary header-right" ng-click="go_to_activity()">创建活动</button>
+</header>
+
+<div id="wrapper" class="wrapper scrollable">
+    <ul class="list-style-2">
+        <li  ng-repeat="activity in activities">
+            <a href = '#/create_sign_up' style="text-align: center">
+                <h2>{{activity.name}}</h2>
+                <!--<i class="icon-angle-right"></i>-->
+            </a>
+        </li>
+    </ul>
+
+</div>
