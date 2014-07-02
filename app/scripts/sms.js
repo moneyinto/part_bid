@@ -13,7 +13,7 @@ var native_accessor = {
     },
 
     process_received_message: function (json_message) {
-        //console.log(json_message.messages);
+        
         var activities = JSON.parse(localStorage.getItem('activities'));
         var person_name = json_message.messages[0].message;
         var person_phone = json_message.messages[0].phone;
