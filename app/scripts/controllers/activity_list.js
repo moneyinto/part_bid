@@ -17,5 +17,9 @@ angular.module('card1App')
         }
         $scope.go_to_activity = function () {
             $location.path('/create_activity')
+        };
+        $scope.go_to_sign_up = function (activity) {
+            var activityName = activity.name;
+            localStorage.setItem('activityName' , JSON.stringify(activityName))
         }
     });

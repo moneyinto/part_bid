@@ -29,4 +29,5 @@ angular.module('card1App')
             $scope.start = 0;
             $location.path('/bidding_list');
         }
+        $scope.peopleCount = localStorage.getItem('peopleCount');
     });

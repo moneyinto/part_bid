@@ -13,30 +13,37 @@ var native_accessor = {
     },
 
     process_received_message: function (json_message) {
-        
+
         var activities = JSON.parse(localStorage.getItem('activities'));
         var person_name = json_message.messages[0].message;
         var person_phone = json_message.messages[0].phone;
+        var activityName = JSON.parse(localStorage.getItem('activityName'));
+        for (var i = 0; i < activities.length; i++) {
+            if (activities[i].name == activityName) {
+                var peopleList = activities[i].peopleList || [];
+                for(var j = 0;j < peopleList.length;j++){
+                    console.log(peopleList[j].personPhone);
+                    console.log(person_phone);
+                    if(peopleList[j].personPhone != person_phone){
+                        peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
+                        activities[i].peopleList = peopleList;
+                        localStorage.setItem('activities', JSON.stringify(activities));
+//                        localStorage.setItem('peopleCount',JSON.stringify(peopleCount));
+                        break;
+                    }
+                }
+                if(!peopleList.length){
+                    peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
+                    activities[i].peopleList = peopleList;
+                    localStorage.setItem('activities', JSON.stringify(activities));
+//                    localStorage.setItem('peopleCount',JSON.stringify(peopleCount));
+                }
 
-//        for (var i = 0; i < activities.length; i++) {
-//            if (activities[i].name == activityName) {
-//                var peopleList = activities[0].peopleList || [];
-//                peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-//                activities[0].peopleList = peopleList;
+            }
 
-               if (!activities[0].peopleList) {
-                   activities[0].peopleList = [];
-               }
-
-               activities[0].peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-
-                localStorage.setItem('activities', JSON.stringify(activities));
-//            }
-
-//        }
+        }
     }
-//   localStorage.setItem('list', JSON.stringify(json_message.messages));
-};
+}
 
 function notify_message_received(message_json) {
     //console.log(JSON.stringify(message_json));
