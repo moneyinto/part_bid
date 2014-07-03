@@ -1,11 +1,21 @@
 <div class="header" style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #0079c8), color-stop(1, #0067b6))">
     <header>
-        报名（{{peopleCount}}人）
+        报名({{peopleCount}}人）
         <button class="btn btn-primary header-left" ng-click="back_to_list()">返回</button>
         <button class="btn btn-primary header-right" ng-click="start()" ng-disabled = "!start">{{start_end}}</button>
     </header>
 </div>
-<ul class="footer-nav footer-nav-2tabs footer" style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727))">
+
+<div id="wrapper" class="wrapper scrollable">
+    <ul class="list-style-2">
+        <li  ng-repeat="person in peopleList">
+             <h2 class = "left">{{person.peopleName}}</h2>
+             <h2 class = "right">{{person.peoplePhone}}</h2>
+        </li>
+    </ul>
+</div>
+
+<ul class="footer-nav footer-nav-2tabs footer" style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727)); margin-bottom: 0px;">
     <li>
         <a href = "" ng-click="sign_up()" style="font-size: 30px;padding-top: 30px;padding-bottom: 30px;">
             报名

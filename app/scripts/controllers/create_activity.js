@@ -11,7 +11,7 @@ angular.module('card1App')
             $location.path('/')
         };
 
-//        $scope.activities = JSON.parse(localStorage.getItem('activities'));
+        $scope.activities = JSON.parse(localStorage.getItem('activities'));
 
         $scope.create = function () {
 

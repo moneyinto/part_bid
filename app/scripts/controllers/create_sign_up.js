@@ -30,4 +30,5 @@ angular.module('card1App')
             $location.path('/bidding_list');
         }
         $scope.peopleCount = localStorage.getItem('peopleCount');
+        var activities = JSON.parse(localStorage.getItem('activities'));
     });

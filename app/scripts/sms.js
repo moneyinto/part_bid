@@ -21,27 +21,30 @@ var native_accessor = {
         for (var i = 0; i < activities.length; i++) {
             if (activities[i].name == activityName) {
                 var peopleList = activities[i].peopleList || [];
-                for(var j = 0;j < peopleList.length;j++){
+                var peopleCount = peopleList.length
+                for (var j = 0; j < peopleList.length; j++) {
                     console.log(peopleList[j].personPhone);
                     console.log(person_phone);
-                    if(peopleList[j].personPhone != person_phone){
+                    if (peopleList[j].personPhone != person_phone) {
                         peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
                         activities[i].peopleList = peopleList;
+                        peopleCount++;
                         localStorage.setItem('activities', JSON.stringify(activities));
-//                        localStorage.setItem('peopleCount',JSON.stringify(peopleCount));
                         break;
                     }
                 }
-                if(!peopleList.length){
+                if (!peopleList.length) {
+                    peopleCount = 1;
                     peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
                     activities[i].peopleList = peopleList;
                     localStorage.setItem('activities', JSON.stringify(activities));
-//                    localStorage.setItem('peopleCount',JSON.stringify(peopleCount));
                 }
 
             }
 
         }
+        localStorage.setItem('peopleCount',peopleCount);
+       // location.reload([bForceGet]);
     }
 }
 
