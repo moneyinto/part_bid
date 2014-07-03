@@ -28,7 +28,17 @@ angular.module('card1App')
         $scope.bidding = function () {
             $scope.start = 0;
             $location.path('/bidding_list');
-        }
+        };
+
         $scope.peopleCount = localStorage.getItem('peopleCount');
         var activities = JSON.parse(localStorage.getItem('activities'));
+        var activityName = JSON.parse(localStorage.getItem('activityName'));
+        for(var i = 0; i < activities.length; i++){
+               console.log('bbb');
+            if(activities[i].name == activityName ){
+                console.log('aaa');
+               $scope.peopleList = activities[i].peopleList;
+                console.log(activities[i].peopleList)
+            }
+        }
     });

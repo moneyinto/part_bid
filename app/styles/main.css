@@ -82,4 +82,10 @@
       bottom: 0;
       width:100%;
   }
+  .left{
+      margin-left: 0px;
+  }
+  .right{
+      margin-right: 0px;
+  }
 }

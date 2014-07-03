@@ -6,11 +6,14 @@
     </header>
 </div>
 
-<div id="wrapper" class="wrapper scrollable">
+<div id="wrapper" class="wrapper">
     <ul class="list-style-2">
         <li  ng-repeat="person in peopleList">
-             <h2 class = "left">{{person.peopleName}}</h2>
-             <h2 class = "right">{{person.peoplePhone}}</h2>
+            <h3>
+                <p style = "font-size: 30px">{{person.personName}}</p>
+                <p>{{person.personPhone}}</p>
+            </h3>
+             <!--<div class = "right">{{person.personPhone}}</div>-->
         </li>
     </ul>
 </div>
