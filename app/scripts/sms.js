@@ -13,30 +13,32 @@ var native_accessor = {
     },
 
     process_received_message: function (json_message) {
-
         var activities = JSON.parse(localStorage.getItem('activities'));
         var person_name = json_message.messages[0].message;
         var person_phone = json_message.messages[0].phone;
         var activityName = JSON.parse(localStorage.getItem('activityName'));
         for (var i = 0; i < activities.length; i++) {
             if (activities[i].name == activityName) {
-                var peopleList = activities[i].peopleList || [];
-//                var peopleCount = peopleList.length;
-                for (var j = 0; j < peopleList.length; j++) {
-                    if (peopleList[j].personPhone != person_phone) {
+                if (activities[i].status == 0) {
+                    var peopleList = activities[i].peopleList || [];
+                    for (var j = 0; j < peopleList.length; j++) {
+                        if (peopleList[j].personPhone != person_phone) {
+                            peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
+                            activities[i].peopleList = peopleList;
+                            localStorage.setItem('activities', JSON.stringify(activities));
+                            console.log("恭喜报名成功！");
+                            break;
+                        }
+                    }
+                    if (!peopleList.length) {
                         peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
                         activities[i].peopleList = peopleList;
-//                        peopleCount++;
                         localStorage.setItem('activities', JSON.stringify(activities));
-                        break;
                     }
                 }
-                if (!peopleList.length) {
-                    peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-                    activities[i].peopleList = peopleList;
-                    localStorage.setItem('activities', JSON.stringify(activities));
+                else{
+                    console.log("活动尚未开始或已经结束！");
                 }
-
             }
 
         }
