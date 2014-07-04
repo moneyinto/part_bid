@@ -14,43 +14,35 @@ angular.module('card1App')
         var activityName = JSON.parse(localStorage.getItem('activityName'));
         for (var i = 0; i < activities.length; i++){
             if (activities[i].name == activityName) {
-                if(activities[i].status){
-                    $scope.status = activities[i].status;
-                    break;
-                }
-                else{
-                    $scope.status = activities[i].status = 1;
-                    console.log(status);
-                    break;
-                }
-
+                $scope.status = activities[i].status;
+                break;
+            }
+        }
+        for (var i = 0; i < activities.length; i++) {
+            if (activities[i].status == 0) {
+                $scope.check = 1;
+//                console.log(check);
+                break;
+            }
+            else{
+                $scope.check = 0;
             }
         }
         $scope.start = function () {
             for (var i = 0; i < activities.length; i++){
                 if (activities[i].name == activityName) {
                     $scope.status = activities[i].status = 0;
-                    console.log(status);
+                    localStorage.setItem('activities',JSON.stringify(activities));
                     break;
                 }
             }
-//            if ($scope.start_end == "开始" ){
-//                $scope.start_end = "结束";
-//            }
-//            else{
-//                if(confirm("确认要结束本次报名吗？")){
-//                    $scope.start_end = "开始";
-//                }
-//                else{
-//                    $scope.start_end = "结束";
-//                }
-//           }
         };
         $scope.end = function () {
             if (confirm("确认要结束本次报名吗？")){
                 for (var i = 0; i < activities.length; i++){
                     if (activities[i].name == activityName) {
                         $scope.status = activities[i].status = 1;
+                        localStorage.setItem('activities',JSON.stringify(activities));
                         break;
                     }
                 }
@@ -63,10 +55,10 @@ angular.module('card1App')
 //            $location.path('/bidding_list');
 //        };
 
-//        $scope.peopleCount = localStorage.getItem('peopleCount');
         for(var i = 0; i < activities.length; i++){
             if(activities[i].name == activityName ){
                var peopleList = activities[i].peopleList || [];
+                $scope.peopleList = activities[i].peopleList;
                 if (peopleList.length){
                     $scope.peopleCount = peopleList.length;
                 }

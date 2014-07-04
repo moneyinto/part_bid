@@ -16,9 +16,8 @@ angular.module('card1App')
         $scope.create = function () {
 
             var activityName = $scope.activityName;
-            var activities = {'name': activityName};
-            activities =  JSON.parse(localStorage.getItem('activities')) || [] ;
 
+            var activities =  JSON.parse(localStorage.getItem('activities')) || [] ;
 
             for (var i = 0; i < activities.length; i++) {
 
@@ -26,7 +25,7 @@ angular.module('card1App')
                     $scope.warning = '活动名称重复';
                     break;
                 } else if (i + 1 == activities.length) {
-                    activities.unshift({'name' : activityName});
+                    activities.unshift({'name' : activityName,'status':1});
                     localStorage.setItem('activities', JSON.stringify(activities));
                     $location.path('/create_sign_up');
                     break;

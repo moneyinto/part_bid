@@ -3,7 +3,7 @@
         报名({{peopleCount}}人）
         <button class="btn btn-primary header-left" ng-click = "back_to_list()">返回</button>
         <button class="btn btn-primary header-right" ng-click = "end()" ng-show = "!status">结束</button>
-        <button class="btn btn-primary header-right" ng-click = "start()" ng-show = "status">开始</button>
+        <button class="btn btn-primary header-right" ng-click = "start()" ng-disabled = "check" ng-show = "status">开始</button>
     </header>
 </div>
 

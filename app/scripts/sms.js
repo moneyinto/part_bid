@@ -31,17 +31,15 @@ var native_accessor = {
                         break;
                     }
                 }
-//                if (!peopleList.length) {
-//                    peopleCount = 1;
-//                    peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-//                    activities[i].peopleList = peopleList;
-//                    localStorage.setItem('activities', JSON.stringify(activities));
-//                }
+                if (!peopleList.length) {
+                    peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
+                    activities[i].peopleList = peopleList;
+                    localStorage.setItem('activities', JSON.stringify(activities));
+                }
 
             }
 
         }
-        localStorage.setItem('peopleCount',peopleCount);
 //        location.reload([bForceGet]);
     }
 }
