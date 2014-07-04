@@ -1,8 +1,9 @@
 <div class="header" style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #0079c8), color-stop(1, #0067b6))">
     <header>
         报名({{peopleCount}}人）
-        <button class="btn btn-primary header-left" ng-click="back_to_list()">返回</button>
-        <button class="btn btn-primary header-right" ng-click="start()" ng-disabled = "!start">{{start_end}}</button>
+        <button class="btn btn-primary header-left" ng-click = "back_to_list()">返回</button>
+        <button class="btn btn-primary header-right" ng-click = "end()" ng-show = "!status">结束</button>
+        <button class="btn btn-primary header-right" ng-click = "start()" ng-show = "status">开始</button>
     </header>
 </div>
 

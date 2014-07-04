@@ -44,7 +44,7 @@ var native_accessor = {
 
         }
         localStorage.setItem('peopleCount',peopleCount);
-        location.reload([bForceGet]);
+//        location.reload([bForceGet]);
     }
 }
 
