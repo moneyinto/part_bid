@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('card1App')
-    .controller('CreateSignUpCtrl', function ($scope,$location) {
+    .controller('CreateSignUpCtrl', function ($scope, $location) {
         $scope.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -12,37 +12,46 @@ angular.module('card1App')
         };
         var activities = JSON.parse(localStorage.getItem('activities'));
         var activityName = JSON.parse(localStorage.getItem('activityName'));
-        for (var i = 0; i < activities.length; i++){
-            if (activities[i].name == activityName) {
-                $scope.status = activities[i].status;
-                break;
+        if (!activityName) {
+            $scope.status = 1;
+        }
+        else {
+            for (var i = 0; i < activities.length; i++) {
+                if (activities[i].name == activityName) {
+                    $scope.status = activities[i].status;
+                    break;
+                }
             }
         }
+
         for (var i = 0; i < activities.length; i++) {
             if (activities[i].status == 0) {
                 $scope.check = 1;
 //                console.log(check);
                 break;
             }
-            else{
+            else {
                 $scope.check = 0;
             }
         }
         $scope.start = function () {
-            for (var i = 0; i < activities.length; i++){
+            for (var i = 0; i < activities.length; i++) {
                 if (activities[i].name == activityName) {
                     $scope.status = activities[i].status = 0;
-                    localStorage.setItem('activities',JSON.stringify(activities));
+                    var startActivity = {'startActivity': activityName};
+                    localStorage.setItem('startActivity', JSON.stringify(startActivity));
+                    localStorage.setItem('activities', JSON.stringify(activities));
                     break;
                 }
             }
         };
         $scope.end = function () {
-            if (confirm("确认要结束本次报名吗？")){
-                for (var i = 0; i < activities.length; i++){
+            if (confirm("确认要结束本次报名吗？")) {
+                for (var i = 0; i < activities.length; i++) {
                     if (activities[i].name == activityName) {
                         $scope.status = activities[i].status = 1;
-                        localStorage.setItem('activities',JSON.stringify(activities));
+                        localStorage.removeItem('startActivity');
+                        localStorage.setItem('activities', JSON.stringify(activities));
                         break;
                     }
                 }
@@ -55,18 +64,25 @@ angular.module('card1App')
 //            $location.path('/bidding_list');
 //        };
 
-        for(var i = 0; i < activities.length; i++){
-            if(activities[i].name == activityName ){
-               var peopleList = activities[i].peopleList || [];
-                $scope.peopleList = activities[i].peopleList;
-                if (peopleList.length){
-                    $scope.peopleCount = peopleList.length;
+        $scope.refresh = function () {
+            console.log('1111');
+            var activities = JSON.parse(localStorage.getItem('activities'));
+            var activityName = JSON.parse(localStorage.getItem('activityName'));
+            for (var i = 0; i < activities.length; i++) {
+                if (activities[i].name == activityName) {
+                    var peopleList = activities[i].peopleList || [];
+                    $scope.peopleList = activities[i].peopleList;
+                    if (peopleList.length) {
+                        $scope.peopleCount = peopleList.length;
+                    }
+                    else {
+                        $scope.peopleCount = 0;
+                    }
+                    break;
                 }
-                else{
-                    $scope.peopleCount = 0;
-                }
-                break;
             }
-        }
-        localStorage.setItem('activities',JSON.stringify(activities));
+        };
+        $scope.refresh();
+        localStorage.setItem('activities', JSON.stringify(activities));
+        console.log('ssss', $scope)
     });

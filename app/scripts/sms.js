@@ -16,32 +16,49 @@ var native_accessor = {
         var activities = JSON.parse(localStorage.getItem('activities'));
         var person_name = json_message.messages[0].message;
         var person_phone = json_message.messages[0].phone;
-        var activityName = JSON.parse(localStorage.getItem('activityName'));
-        for (var i = 0; i < activities.length; i++) {
-            if (activities[i].name == activityName) {
-                if (activities[i].status == 0) {
-                    var peopleList = activities[i].peopleList || [];
-                    for (var j = 0; j < peopleList.length; j++) {
-                        if (peopleList[j].personPhone != person_phone) {
+        if (JSON.parse(localStorage.getItem('startActivity'))) {
+            var startActivity = JSON.parse(localStorage.getItem('startActivity'));
+            for (var i = 0; i < activities.length; i++) {
+                if (activities[i].name == startActivity.startActivity) {
+                    if (activities[i].status == 0) {
+                        var peopleList = activities[i].peopleList || [];
+                        for (var j = 0; j < peopleList.length; j++) {
+                            if (peopleList[j].personPhone != person_phone) {
+                                peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
+                                activities[i].peopleList = peopleList;
+                                localStorage.setItem('activities', JSON.stringify(activities));
+
+                                var signUp = document.getElementById("signUp");
+                                if (signUp) {
+                                    var scope = angular.element(signUp).scope();
+                                    scope.$apply(function(){
+                                        scope.refresh();
+                                        scope.start();
+                                        scope.end();
+                                    });
+                                }
+
+                                console.log("恭喜报名成功！");
+                                break;
+                            }
+                        }
+                        if (!peopleList.length) {
                             peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
                             activities[i].peopleList = peopleList;
                             localStorage.setItem('activities', JSON.stringify(activities));
-                            console.log("恭喜报名成功！");
-                            break;
                         }
                     }
-                    if (!peopleList.length) {
-                        peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-                        activities[i].peopleList = peopleList;
-                        localStorage.setItem('activities', JSON.stringify(activities));
+                    else{
+                        console.log("活动尚未开始或已经结束！");
                     }
                 }
-                else{
-                    console.log("活动尚未开始或已经结束！");
-                }
-            }
 
+            }
         }
+        else{
+            console.log('活动尚未开始或已经结束！');
+        }
+
 //        location.reload([bForceGet]);
     }
 }
