@@ -47,6 +47,7 @@ angular.module('card1App')
         };
         $scope.end = function () {
             if (confirm("确认要结束本次报名吗？")) {
+                $scope.check = 0;
                 for (var i = 0; i < activities.length; i++) {
                     if (activities[i].name == activityName) {
                         $scope.status = activities[i].status = 1;

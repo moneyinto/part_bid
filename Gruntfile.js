@@ -31,6 +31,10 @@ module.exports = function (grunt) {
           activity_list: {
               src: 'app/views/activity_list.jade',
               dest: 'app/views/activity_list.html'
+          },
+          create_sign_up: {
+              src: 'app/views/create_sign_up.jade',
+              dest: 'app/views/create_sign_up.html'
           }
       },
 

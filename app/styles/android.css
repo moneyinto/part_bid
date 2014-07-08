@@ -227,24 +227,24 @@ hr {
 	border-radius: 0 0 100% 100% / 0 0 40% 40%;
 }
 
-.brand {
-	background-image: url(../img/logo.png);
-	background-size: 153px 119px;
-	width: 153px;
-	height: 119px;
-	position: absolute;
-	top:70px;
-	left: 50%;
-	margin-left: -76px;
-}
+/*.brand {*/
+	/*background-image: url(../img/logo.png);*/
+	/*background-size: 153px 119px;*/
+	/*width: 153px;*/
+	/*height: 119px;*/
+	/*position: absolute;*/
+	/*top:70px;*/
+	/*left: 50%;*/
+	/*margin-left: -76px;*/
+/*}*/
 
-.logo-flat {
-	background-image: url(../img/logo-flat.png);
-	background-size: 84px 67px;
-	width: 84px;
-	height: 67px;
-	margin: 20px auto;
-}
+/*.logo-flat {*/
+	/*background-image: url(../img/logo-flat.png);*/
+	/*background-size: 84px 67px;*/
+	/*width: 84px;*/
+	/*height: 67px;*/
+	/*margin: 20px auto;*/
+/*}*/
 
 .index-action {
 	position: relative;
@@ -721,21 +721,26 @@ hr {
 }
 
 .custom-checkbox-checked:after {
-	font-family: FontAwesome;
-	font-weight: normal;
-	font-style: normal;
-	text-decoration: inherit;
-	-webkit-font-smoothing: antialiased;
-	content: "\f00c";
-	font-size: 14px;
-	display: block;
-	position: absolute;
-	top: -3px;
-	left: -21px;
-	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3697dd), color-stop(1, #0070bd));
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    content: "\f00c";
+    font-size: 14px;
+    display: block;
+    position: absolute;
+    top: -3px;
+    left: -21px;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3697dd), color-stop(1, #0070bd));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
+.color0{
+    background: #ffff4f
+}
+
 
 
 

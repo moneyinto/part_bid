@@ -61,34 +61,35 @@
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  /*.header,*/
-  /*.marketing,*/
-  /*.footer {*/
+    /* Remove the padding we set earlier */
+    /*.header,*/
+    /*.marketing,*/
+    /*.footer {*/
     /*padding-left: 0;*/
     /*padding-right: 0;*/
-  /*}*/
-  /* Space out the masthead */
-  /*.header {*/
+    /*}*/
+    /* Space out the masthead */
+    /*.header {*/
     /*margin-bottom: 30px;*/
-  /*}*/
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-  .bottom{
-      padding-left: 0;
-      position: absolute;
-      bottom: 0;
-      width:100%;
-  }
-  .left{
-      margin-left: 0px;
-  }
-  .right{
-      margin-right: 0px;
-  }
-  .color0{
-      background: #ffff4f
-  }
+    /*}*/
+    /* Remove the bottom border on the jumbotron for visual effect */
 }
+    .jumbotron {
+        border-bottom: 0;
+    }
+
+    .bottom {
+        padding-left: 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .left {
+        margin-left: 0px;
+    }
+
+    .right {
+        margin-right: 0px;
+    }
+
