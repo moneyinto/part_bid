@@ -24,15 +24,22 @@ var native_accessor = {
                     if (activities[i].name == startActivity.startActivity) {
                         if (activities[i].status == 0) {
                             var peopleList = activities[i].peopleList || [];
+                            var exist = 1;
                             for (var j = 0; j < peopleList.length; j++) {
                                 if (peopleList[j].personPhone == person_phone) {
                                     native_accessor.send_sms(json_message.messages[0].phone, "您已报名成功，请勿重复报名");
+                                    exist = 0;
                                     break;
                                 }
                             }
-                            peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-                            activities[i].peopleList = peopleList;
-                            localStorage.setItem('activities', JSON.stringify(activities));
+                            if(exist == 1) {
+                                peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
+                                activities[i].peopleList = peopleList;
+                                localStorage.setItem('activities', JSON.stringify(activities));
+                                native_accessor.send_sms(json_message.messages[0].phone, "恭喜报名成功！");
+//                                console.log("恭喜报名成功！");
+                            }
+
 
                             var signUp = document.getElementById("signUp");
                             if (signUp) {
@@ -41,8 +48,7 @@ var native_accessor = {
                                 scope.refresh()
                                 });
                             }
-                            native_accessor.send_sms(json_message.messages[0].phone, "恭喜报名成功！");
-                            console.log("恭喜报名成功！");
+
                             if (!peopleList.length) {
                                 peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
                                 activities[i].peopleList = peopleList;
