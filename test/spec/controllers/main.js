@@ -3,7 +3,7 @@
 describe('Controller: MainCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('partyBidApp'));
+  beforeEach(module('card1App'));
 
   var MainCtrl,
     scope;

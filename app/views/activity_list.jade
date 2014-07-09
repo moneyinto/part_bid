@@ -1,0 +1,36 @@
+header.header(style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #0079c8),color-stop(1, #0067b6))")
+    活动列表
+    button.btn.btn-primary.header-right(ng-click="go_to_activity()") 创建活动
+#wrapper.wrapper.scrollable
+    ul.ist-style-2
+       li(ng-repeat="activity in activities")
+            a(href = "#/create_sign_up" ng-click = 'go_to_sign_up(activity)' style="text-align: center")
+                h2(class = "color{{activity.status}}") {{activity.name}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,10 +1,8 @@
 'use strict';
 
 angular
-  .module('partyBidApp', [
-    'ngCookies',
+  .module('card1App', [
     'ngResource',
-    'ngSanitize',
     'ngRoute'
   ])
   .config(function ($routeProvider) {
