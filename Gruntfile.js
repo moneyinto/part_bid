@@ -35,6 +35,10 @@ module.exports = function (grunt) {
           create_sign_up: {
               src: 'app/views/create_sign_up.jade',
               dest: 'app/views/create_sign_up.html'
+          },
+          bidding_list: {
+              src: 'app/views/bidding_list.jade',
+              dest: 'app/views/bidding_list.html'
           }
       },
 

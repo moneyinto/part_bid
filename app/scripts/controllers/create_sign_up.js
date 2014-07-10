@@ -53,6 +53,7 @@ angular.module('card1App')
                         $scope.status = activities[i].status = 1;
                         localStorage.removeItem('startActivity');
                         localStorage.setItem('activities', JSON.stringify(activities));
+                        $location.path('/bidding_list')
                         break;
                     }
                 }

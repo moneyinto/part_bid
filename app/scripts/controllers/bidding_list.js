@@ -7,4 +7,7 @@ angular.module('card1App')
             'AngularJS',
             'Karma'
         ];
+        $scope.back_to_activity_list = function(){
+            $location.path('/activity_list');
+        }
     });
