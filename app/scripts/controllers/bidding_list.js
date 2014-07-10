@@ -9,5 +9,8 @@ angular.module('card1App')
         ];
         $scope.back_to_activity_list = function(){
             $location.path('/activity_list');
-        }
+        };
+        $scope.start = function(){
+          $location.path('/bidding_sign_up')
+        };
     });

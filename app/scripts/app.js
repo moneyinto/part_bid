@@ -23,6 +23,10 @@ angular
             templateUrl:'views/bidding_list.html',
             controller:'BiddingListCtrl'
         })
+        .when('/bidding_sign_up',{
+            templateUrl:'views/bidding_sign_up.html',
+            controller:'BiddingSignUpCtrl'
+        })
       .otherwise({
         redirectTo: '/'
       });
