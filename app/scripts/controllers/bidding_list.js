@@ -30,13 +30,13 @@ angular.module('card1App')
                   break;
               }
           }
-//          $location.path('/bidding_sign_up')
+          $location.path('/bidding_sign_up')
         };
-//        for (var j = 0;j < activities.length;j++){
-//            if (activities[j].name == activityName){
-//
-//                $scope.bidList = activities[j].bidList;
-//                break;
-//            }
-//        }
+        for (var j = 0;j < activities.length;j++){
+            if (activities[j].name == activityName){
+
+                $scope.bidList = activities[j].bidList;
+                break;
+            }
+        }
     });
