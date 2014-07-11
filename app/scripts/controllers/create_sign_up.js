@@ -67,7 +67,7 @@ angular.module('card1App')
 //        };
 
         $scope.refresh = function () {
-            console.log('1111');
+//            console.log('1111');
             var activities = JSON.parse(localStorage.getItem('activities'));
             var activityName = JSON.parse(localStorage.getItem('activityName'));
             for (var i = 0; i < activities.length; i++) {
@@ -86,5 +86,5 @@ angular.module('card1App')
         };
         $scope.refresh();
         localStorage.setItem('activities', JSON.stringify(activities));
-        console.log('ssss', $scope)
+//        console.log('ssss', $scope)
     });
