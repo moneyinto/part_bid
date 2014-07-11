@@ -21,22 +21,16 @@ angular.module('card1App')
         $scope.start = function(){
           for (var j = 0;j < activities.length;j++){
               if (activities[j].name == activityName){
-                  var bidList = activities[j].bidList || [];
-//                  $scope.bidCount = bidList.length + 1;
-                  console.log('jj');
-                  bidList.unshift({'bid':"竞价" + (bidList.length + 1)});
-                  activities[j].bidList = bidList;
+                  var bidList = JSON.parse(localStorage.getItem(activityName)) || [] ;
+                  var bid = "竞价" + (bidList.length + 1);
+                  bidList.unshift({'bid': bid,'colorStatus':0});
+                  activities[j].status = 0;
                   localStorage.setItem('activities',JSON.stringify(activities));
+                  localStorage.setItem(activityName,JSON.stringify(bidList));
                   break;
               }
           }
           $location.path('/bidding_sign_up')
         };
-        for (var j = 0;j < activities.length;j++){
-            if (activities[j].name == activityName){
-
-                $scope.bidList = activities[j].bidList;
-                break;
-            }
-        }
+        $scope.bidList = JSON.parse(localStorage.getItem(activityName));
     });

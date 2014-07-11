@@ -6,9 +6,9 @@
 
 <div id = "wrapper" class = "wrapper scrollable">
     <ul class = "list-style-2">
-        <li ng-repeat="bid in bidList">
+        <li ng-repeat = "activityBid in bidList">
             <a href = "#/bidding_sign_up" ng-click = 'go_to_bidding_sign_up()' style="text-align: center">
-                <h2>{{bid.bid}}</h2>
+                <h2 class="color{{activityBid.colorStatus}}">{{activityBid.bid}}</h2>
             </a>
         </li>
     </ul>

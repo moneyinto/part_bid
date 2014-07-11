@@ -5,9 +5,9 @@ header.header(style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, co
 
 #wrapper.wrapper.scrollable
     ul.list-style-2
-        li(ng-repeat="bid in bidList")
+        li(ng-repeat="activityBid in bidList")
             a(href = "#/bidding_sign_up" ng-click = 'go_to_bidding_sign_up()' style="text-align: center")
-                h2{{bidList.bid}}
+                h2{{activityBid.bid}}
 
 ul.footer-nav.footer-nav-2tabs.footer(style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727)); margin-bottom: 0px;")
     li
