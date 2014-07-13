@@ -14,7 +14,70 @@ var native_accessor = {
 
     process_received_message: function (json_message) {
         var activities = JSON.parse(localStorage.getItem('activities'));
+        var bidList = JSON.parse(localStorage.getItem('bidList'));
         var message = json_message.messages[0].message.replace(/\s/g, "");
+        var exist = 1;
+        if (message.search(/jj/i) == 0) {
+            var bid_price = message.substr(2);
+            var bid_phone = json_message.messages[0].phone;
+            if (bidList) {
+                if (bidList[0].colorStatus == 0) {
+                    var bidInformation = bidList[0].bidIformation || [];
+                    for (var n = 0; n < activities.length; n++) {
+                        if (activities[n].name == bidList[0].activityName) {
+                            var people_list = activities[n].peopleList;
+                            if (people_list) {
+                                var even = _.find(people_list, function (person_phone) {
+                                    return person_phone.personPhone == bid_phone
+                                });
+                                if (even) {
+                                    if (!bidInformation.length) {
+                                        bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
+                                        bidList[0].bidIformation = bidInformation;
+                                        localStorage.setItem('bidList', JSON.stringify(bidList));
+                                        console.log('恭喜！你已出价成功！');
+                                        break;
+                                    }
+                                    if (bidInformation.length) {
+                                        for (var x = 0; x < bidInformation.length; x++) {
+                                            if (bid_phone == bidInformation[x].bidPhone) {
+                                                console.log('你已出价，请勿重复出价！');
+                                                exist = 0;
+                                                break;
+                                            }
+                                        }
+                                        if (exist == 1) {
+                                            bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
+                                            bidList[0].bidIformation = bidInformation;
+                                            localStorage.setItem('bidList', JSON.stringify(bidList));
+                                            console.log('恭喜！你已出价成功！');
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                }
+                                else {
+                                    console.log('对不起，你没有报名该活动！');
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else {
+                                console.log('对不起，你没有报名该活动！');
+                            }
+                        }
+                    }
+                }
+                else {
+                    console.log('活动尚未开始或已经结束！');
+                }
+            }
+            else {
+                console.log('活动竞价尚未开始！');
+            }
+        }
+
         if (message.search(/bm/i) == 0) {
             var person_name = message.substr(2);
             var person_phone = json_message.messages[0].phone;
@@ -24,7 +87,6 @@ var native_accessor = {
                     if (activities[i].name == startActivity.startActivity) {
                         if (activities[i].status == 0) {
                             var peopleList = activities[i].peopleList || [];
-                            var exist = 1;
                             for (var j = 0; j < peopleList.length; j++) {
                                 if (peopleList[j].personPhone == person_phone) {
                                     native_accessor.send_sms(json_message.messages[0].phone, "您已报名成功，请勿重复报名");
@@ -32,7 +94,7 @@ var native_accessor = {
                                     break;
                                 }
                             }
-                            if(exist == 1) {
+                            if (exist == 1) {
                                 peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
                                 activities[i].peopleList = peopleList;
                                 localStorage.setItem('activities', JSON.stringify(activities));
@@ -45,7 +107,7 @@ var native_accessor = {
                             if (signUp) {
                                 var scope = angular.element(signUp).scope();
                                 scope.$apply(function () {
-                                scope.refresh()
+                                    scope.refresh();
                                 });
                             }
 

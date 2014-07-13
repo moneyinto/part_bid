@@ -12,6 +12,8 @@ angular.module('card1App')
         };
         var activities = JSON.parse(localStorage.getItem('activities'));
         var activityName = JSON.parse(localStorage.getItem('activityName'));
+        var bidList = JSON.parse(localStorage.getItem('bidList'));
+        $scope.colorStatus = bidList[0].colorStatus;
         if (!activityName) {
             $scope.status = 1;
         }
@@ -24,11 +26,10 @@ angular.module('card1App')
             }
         }
 
-        for (var i = 0; i < activities.length; i++) {
-            if (activities[i].status == 0) {
-                $scope.check = 1;
-//                console.log(check);
-                break;
+        for (var j = 0; j < activities.length;j++) {
+            if (activities[j].status == 0) {
+                    $scope.check = 1;
+                    break;
             }
             else {
                 $scope.check = 0;

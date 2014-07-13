@@ -8,7 +8,22 @@ angular.module('card1App')
             'Karma'
         ];
         var activities = JSON.parse(localStorage.getItem('activities'));
+
+        var bidList = JSON.parse(localStorage.getItem('bidList')) || [] ;
+        for(var i = 0;i < activities.length;i++){
+            var evens = _.filter(bidList, function(activity){ return  activity.activityName == activities[i].name; });
+            console.log(evens.length);
+            if(evens.length){
+                activities[i].colorStatus = evens[0].colorStatus;
+            }
+            else{
+                activities[i].colorStatus = 1;
+            }
+
+        }
+        console.log(activities);
         $scope.activities = activities;
+
         if (activities) {
             $location.path('/')
         }

@@ -2,7 +2,7 @@ header.header#signUp(style = "background-image:-webkit-gradient(linear, 0 0, 0 1
      报名（{{peopleCount}}人）
      button.btn.btn-primary.header-left(ng-click = "back_to_list()")返回
      button.btn.btn-primary.header-right(ng-click = "end()" ng-show = "!status")结束
-     button.btn.btn-primary.header-right(ng-click = "start()" ng-disabled = "check" ng-show = "status")开始
+     button.btn.btn-primary.header-right(ng-click = "start()" ng-disabled = "check || !{{colorStatus}}" ng-show = "status")开始
 
 div#wrapper.wrapper
     ul.list-style-2

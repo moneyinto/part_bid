@@ -10,27 +10,33 @@ angular.module('card1App')
         $scope.status = 1;
         var activities = JSON.parse(localStorage.getItem('activities'));
         var activityName = JSON.parse(localStorage.getItem('activityName'));
+        var bidList = JSON.parse(localStorage.getItem('bidList')) || [] ;
+        var evens = _.filter(bidList, function(activity){ return  activity.activityName == activityName; });
         for (var i = 0;i < activities.length;i++){
             if(activities[i].status == 0){
                 $scope.status = 0;
             }
         }
+        if(evens.length){
+            $scope.colorStatus = evens[0].colorStatus;
+        }
+        else{
+            $scope.colorStatus = 1;
+        }
+
         $scope.back_to_activity_list = function(){
             $location.path('/activity_list');
         };
         $scope.start = function(){
-          for (var j = 0;j < activities.length;j++){
-              if (activities[j].name == activityName){
-                  var bidList = JSON.parse(localStorage.getItem(activityName)) || [] ;
-                  var bid = "竞价" + (bidList.length + 1);
-                  bidList.unshift({'bid': bid,'colorStatus':0});
-                  activities[j].status = 0;
-                  localStorage.setItem('activities',JSON.stringify(activities));
-                  localStorage.setItem(activityName,JSON.stringify(bidList));
-                  break;
-              }
-          }
-          $location.path('/bidding_sign_up')
+            console.log(evens);
+            var bid = evens.length + 1;
+            console.log(bid);
+            bidList.unshift({'name': bid,'colorStatus':0,'activityName':activityName});
+            localStorage.setItem('bidList',JSON.stringify(bidList));
+            $location.path('/bidding_sign_up')
         };
-        $scope.bidList = JSON.parse(localStorage.getItem(activityName));
+
+        $scope.evens = evens;
+
+
     });

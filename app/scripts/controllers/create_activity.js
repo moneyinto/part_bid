@@ -35,6 +35,7 @@ angular.module('card1App')
             if (!activities.length) {
                 activities.unshift({'name': activityName,'status':1});
                 localStorage.setItem('activities', JSON.stringify(activities));
+                localStorage.setItem('activityName',activityName);
                 $location.path('/create_sign_up')
             }
         }

@@ -11,7 +11,11 @@ angular.module('card1App')
             $location.path('bidding_list');
         };
         $scope.end = function(){
-
+            if(confirm("确定要结束本次竞价？")){
+                var bidList = JSON.parse(localStorage.getItem('bidList'));
+                bidList[0].colorStatus = 1;
+                localStorage.setItem('bidList',JSON.stringify(bidList));
+            }
         };
 
 
