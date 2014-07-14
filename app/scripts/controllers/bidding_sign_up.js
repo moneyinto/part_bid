@@ -8,6 +8,8 @@ angular.module('card1App')
             'Karma'
         ];
         var bidList = JSON.parse(localStorage.getItem('bidList'));
+        var activities = JSON.parse(localStorage.getItem('activities'));
+        var activityName = JSON.parse(localStorage.getItem('activityName'));
         $scope.back_to_bidding_list = function(){
             $location.path('bidding_list');
         };
@@ -25,4 +27,15 @@ angular.module('card1App')
         else{
             $scope.bidCount = 0;
         }
+        var even = _.find(activities, function(activity){ return activity.name == activityName; });
+        var peopleList = even.peopleList;
+        var bidPeople = [];
+        for (var i = 0;i < bidInformation.length;i++){
+            var bidPhone = bidInformation[i].bidPhone;
+            var personInformation = _.find(peopleList, function(num){ return num.personPhone == bidPhone; });
+            bidPeople.push(personInformation);
+        }
+        $scope.bidPeople = bidPeople;
+
+
     });

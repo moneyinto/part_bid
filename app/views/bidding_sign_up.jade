@@ -2,3 +2,9 @@ header.header(style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, co
     竞价{{bidName}}({{bidCount}})
     button(ng-click = "back_to_bidding_list()"）.btn.btn-primary.header-left返回
     button.btn.btn-primary.header-right(ng-click = "end()")结束
+div#wrapper.wrapper
+    ul.list-style-2
+        li(ng-repeat = "bidPerson in bidPeople")
+            h3
+                p(style = "font-size: 30px"){{bidPerson.personName}}
+                p.header-right{{bidPerson.personPhone}}
