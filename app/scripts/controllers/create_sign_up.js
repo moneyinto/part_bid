@@ -46,21 +46,7 @@ angular.module('card1App')
                 }
             }
         };
-        $scope.end = function () {
-            if (confirm("确认要结束本次报名吗？")) {
-                $scope.check = 0;
-                for (var i = 0; i < activities.length; i++) {
-                    if (activities[i].name == activityName) {
-                        $scope.status = activities[i].status = 1;
-                        localStorage.removeItem('startActivity');
-                        localStorage.setItem('activities', JSON.stringify(activities));
-                        $location.path('/bidding_list');
-                        break;
-                    }
-                }
-            }
 
-        };
 
 //        $scope.bidding = function () {
 //            $scope.start = 0;
@@ -87,5 +73,22 @@ angular.module('card1App')
         };
         $scope.refresh();
         localStorage.setItem('activities', JSON.stringify(activities));
-//        console.log('ssss', $scope)
+        $scope.end = function () {
+            var activities = JSON.parse(localStorage.getItem('activities'));
+            if (confirm("确认要结束本次报名吗？")) {
+                $scope.check = 0;
+                for (var i = 0; i < activities.length; i++) {
+                    if (activities[i].name == activityName) {
+                        console.log(activities[i]);
+                        $scope.status = activities[i].status = 1;
+                        localStorage.removeItem('startActivity');
+                        console.log(activities[i]);
+                        localStorage.setItem('activities', JSON.stringify(activities));
+                        $location.path('/bidding_list');
+                        break;
+                    }
+                }
+            }
+
+        };
     });

@@ -27,10 +27,14 @@ angular.module('card1App')
         $scope.back_to_activity_list = function(){
             $location.path('/activity_list');
         };
+        $scope.go_to_bidding_sign_up = function(bid){
+            localStorage.setItem('bidName',JSON.stringify(bid.name))
+        };
         $scope.start = function(){
             console.log(evens);
             var bid = evens.length + 1;
             console.log(bid);
+            localStorage.setItem('bidName',JSON.stringify(bid))
             bidList.unshift({'name': bid,'colorStatus':0,'activityName':activityName});
             localStorage.setItem('bidList',JSON.stringify(bidList));
             $location.path('/bidding_sign_up')

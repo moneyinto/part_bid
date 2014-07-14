@@ -10,17 +10,21 @@ angular.module('card1App')
         var bidList = JSON.parse(localStorage.getItem('bidList'));
         var activities = JSON.parse(localStorage.getItem('activities'));
         var activityName = JSON.parse(localStorage.getItem('activityName'));
+        var bid_name = JSON.parse(localStorage.getItem('bidName'));
         $scope.back_to_bidding_list = function(){
             $location.path('bidding_list');
         };
         $scope.end = function(){
+            var bidList = JSON.parse(localStorage.getItem('bidList'));
             if(confirm("确定要结束本次竞价？")){
                 bidList[0].colorStatus = 1;
+                localStorage.removeItem('bidName');
                 localStorage.setItem('bidList',JSON.stringify(bidList));
             }
         };
-        var bidInformation = bidList[0].bidIformation || [];
-        $scope.bidName = bidList[0].name;
+        var bid_list = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName});
+        var bidInformation = bid_list.bidIformation || [];
+        $scope.bidName = bid_list.name;
         if(bidInformation){
             $scope.bidCount = bidInformation.length;
         }

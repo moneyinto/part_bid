@@ -8,7 +8,7 @@
 <div id="wrapper" class="wrapper scrollable">
     <ul class="list-style-2">
         <li ng-repeat="bid in evens">
-            <a href="#/bidding_sign_up" ng-click='go_to_bidding_sign_up()' style="text-align: center">
+            <a href="#/bidding_sign_up" ng-click='go_to_bidding_sign_up(bid)' style="text-align: center">
                 <h2 class="color{{bid.colorStatus}}">竞价{{bid.name}}</h2>
             </a>
         </li>

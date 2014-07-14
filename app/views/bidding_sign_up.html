@@ -1,5 +1,5 @@
 <header style="background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #0079c8), color-stop(1, #0067b6))"
-        class="header">竞价{{bidName}}({{bidCount}})
+        class="header">竞价{{bidName}}({{bidCount}}人)
     <button class="btn btn-primary header-left" ng-click="back_to_bidding_list()">返回</button>
     <button ng-click="end()" class="btn btn-primary header-right">结束</button>
 </header>
@@ -9,7 +9,7 @@
         <li ng-repeat="bidPerson in bidPeople">
             <h2><p style="font-size: 30px">{{bidPerson.personName}}</p>
 
-                <p class = "header-right">{{bidPerson.personPhone}}</p></h2>
+                <p>{{bidPerson.personPhone}}</p></h2>
         </li>
     </ul>
 </div>
