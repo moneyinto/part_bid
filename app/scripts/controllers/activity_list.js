@@ -7,7 +7,7 @@ angular.module('card1App')
             'AngularJS',
             'Karma'
         ];
-        var activities = JSON.parse(localStorage.getItem('activities'));
+        var activities = JSON.parse(localStorage.getItem('activities')) || [];
 
         var bidList = JSON.parse(localStorage.getItem('bidList')) || [] ;
         for(var i = 0;i < activities.length;i++){
@@ -24,7 +24,7 @@ angular.module('card1App')
         console.log(activities);
         $scope.activities = activities;
 
-        if (activities) {
+        if (activities.length) {
             $location.path('/')
         }
         else {

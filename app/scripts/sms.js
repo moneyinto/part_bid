@@ -31,13 +31,6 @@ var native_accessor = {
                                     return person_phone.personPhone == bid_phone
                                 });
                                 if (even) {
-                                    if (!bidInformation.length) {
-                                        bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
-                                        bidList[0].bidIformation = bidInformation;
-                                        localStorage.setItem('bidList', JSON.stringify(bidList));
-                                        console.log('恭喜！你已出价成功！');
-                                        break;
-                                    }
                                     if (bidInformation.length) {
                                         for (var x = 0; x < bidInformation.length; x++) {
                                             if (bid_phone == bidInformation[x].bidPhone) {
@@ -51,10 +44,21 @@ var native_accessor = {
                                             bidList[0].bidIformation = bidInformation;
                                             localStorage.setItem('bidList', JSON.stringify(bidList));
                                             console.log('恭喜！你已出价成功！');
-                                            break;
                                         }
                                     }
-                                    break;
+                                    if (!bidInformation.length) {
+                                        bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
+                                        bidList[0].bidIformation = bidInformation;
+                                        localStorage.setItem('bidList', JSON.stringify(bidList));
+                                        console.log('恭喜！你已出价成功！');
+                                    }
+                                    var bidSignUp = document.getElementById("bidSignUp");
+                                    if (bidSignUp) {
+                                        var scopeOne = angular.element(bidSignUp).scope();
+                                        scopeOne.$apply(function () {
+                                            scopeOne.fresh();
+                                        });
+                                    }
                                 }
                                 else {
                                     console.log('对不起，你没有报名该活动！');

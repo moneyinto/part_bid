@@ -22,24 +22,31 @@ angular.module('card1App')
                 localStorage.setItem('bidList',JSON.stringify(bidList));
             }
         };
-        var bid_list = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName});
-        var bidInformation = bid_list.bidIformation || [];
-        $scope.bidName = bid_list.name;
-        if(bidInformation){
-            $scope.bidCount = bidInformation.length;
-        }
-        else{
-            $scope.bidCount = 0;
-        }
-        var even = _.find(activities, function(activity){ return activity.name == activityName; });
-        var peopleList = even.peopleList;
-        var bidPeople = [];
-        for (var i = 0;i < bidInformation.length;i++){
-            var bidPhone = bidInformation[i].bidPhone;
-            var personInformation = _.find(peopleList, function(num){ return num.personPhone == bidPhone; });
-            bidPeople.push(personInformation);
-        }
-        $scope.bidPeople = bidPeople;
+        $scope.fresh = function () {
+            var bidList = JSON.parse(localStorage.getItem('bidList'));
+            var activities = JSON.parse(localStorage.getItem('activities'));
+            var activityName = JSON.parse(localStorage.getItem('activityName'));
+            var bid_name = JSON.parse(localStorage.getItem('bidName'));
+            var bid_list = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName});
+            var bidInformation = bid_list.bidIformation || [];
+            $scope.bidName = bid_list.name;
+            if(bidInformation){
+                $scope.bidCount = bidInformation.length;
+            }
+            else{
+                $scope.bidCount = 0;
+            }
+            var even = _.find(activities, function(activity){ return activity.name == activityName; });
+            var peopleList = even.peopleList;
+            var bidPeople = [];
+            for (var i = 0;i < bidInformation.length;i++){
+                var bidPhone = bidInformation[i].bidPhone;
+                var personInformation = _.find(peopleList, function(num){ return num.personPhone == bidPhone; });
+                bidPeople.push(personInformation);
+            }
+            $scope.bidPeople = bidPeople;
+        };
+        $scope.fresh();
 
 
     });

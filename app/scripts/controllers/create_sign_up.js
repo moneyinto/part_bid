@@ -10,10 +10,16 @@ angular.module('card1App')
         $scope.back_to_list = function () {
             $location.path('/create_list')
         };
-        var activities = JSON.parse(localStorage.getItem('activities'));
+        var activities = JSON.parse(localStorage.getItem('activities')) || [];
         var activityName = JSON.parse(localStorage.getItem('activityName'));
-        var bidList = JSON.parse(localStorage.getItem('bidList'));
-        $scope.colorStatus = bidList[0].colorStatus;
+        var bidList = JSON.parse(localStorage.getItem('bidList')) || [];
+        if(bidList.length){
+            $scope.colorStatus = bidList[0].colorStatus;
+        }
+        else{
+            $scope.colorStatus = 1;
+        }
+
         if (!activityName) {
             $scope.status = 1;
         }
