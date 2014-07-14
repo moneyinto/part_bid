@@ -7,17 +7,22 @@ angular.module('card1App')
             'AngularJS',
             'Karma'
         ];
+        var bidList = JSON.parse(localStorage.getItem('bidList'));
         $scope.back_to_bidding_list = function(){
             $location.path('bidding_list');
         };
         $scope.end = function(){
             if(confirm("确定要结束本次竞价？")){
-                var bidList = JSON.parse(localStorage.getItem('bidList'));
                 bidList[0].colorStatus = 1;
                 localStorage.setItem('bidList',JSON.stringify(bidList));
             }
         };
-
-
-
+        var bidInformation = bidList[0].bidIformation || [];
+        $scope.bidName = bidList[0].name;
+        if(bidInformation){
+            $scope.bidCount = bidInformation.length;
+        }
+        else{
+            $scope.bidCount = 0;
+        }
     });

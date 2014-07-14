@@ -60,8 +60,6 @@ var native_accessor = {
                                     console.log('对不起，你没有报名该活动！');
                                     break;
                                 }
-
-                                break;
                             }
                             else {
                                 console.log('对不起，你没有报名该活动！');
