@@ -11,10 +11,12 @@ header.header(style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, co
                 p{{bidPerson.phone}}
                 p.header-right(style="font-size: 40px;top: 30px")￥{{bidPerson.price}}
 
-ul.footer-nav.footer-nav-2tabs.footer(style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727)); margin-bottom: 0px;")
-    li
+ul.footer-nav.footer-nav-2tabs.footer(style = "margin-bottom: 0px;")
+    h3
+        p.text-center竞价结果：{{sucessName}} 竞价：￥{{sucessPrice}} 电话：{{sucessPhone}}
+    li(style="background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727));")
         a(href = "" style="font-size: 30px;padding-top: 30px;padding-bottom: 30px;")
             竞价结果
-    li
+    li(style="background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727));")
         a(href = "#/bidding_count" style="font-size: 30px;padding-top: 30px;padding-bottom: 30px;")
             竞价统计
