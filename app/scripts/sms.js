@@ -35,6 +35,7 @@ var native_accessor = {
                                         for (var x = 0; x < bidInformation.length; x++) {
                                             if (bid_phone == bidInformation[x].bidPhone) {
                                                 console.log('你已出价，请勿重复出价！');
+                                                native_accessor.send_sms(json_message.messages[0].phone, "你已出价，请勿重复出价！");
                                                 exist = 0;
                                                 break;
                                             }
@@ -43,14 +44,16 @@ var native_accessor = {
                                             bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
                                             bidList[0].bidIformation = bidInformation;
                                             localStorage.setItem('bidList', JSON.stringify(bidList));
-                                            console.log('恭喜！你已出价成功！');
+//                                            console.log('恭喜！你已出价成功！');
+                                            native_accessor.send_sms(json_message.messages[0].phone, "恭喜！你已出价成功！");
                                         }
                                     }
                                     if (!bidInformation.length) {
                                         bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
                                         bidList[0].bidIformation = bidInformation;
                                         localStorage.setItem('bidList', JSON.stringify(bidList));
-                                        console.log('恭喜！你已出价成功！');
+//                                        console.log('恭喜！你已出价成功！');
+                                        native_accessor.send_sms(json_message.messages[0].phone, "恭喜！你已出价成功！");
                                     }
                                     var bidSignUp = document.getElementById("bidSignUp");
                                     if (bidSignUp) {
@@ -61,22 +64,26 @@ var native_accessor = {
                                     }
                                 }
                                 else {
-                                    console.log('对不起，你没有报名该活动！');
+//                                    console.log('对不起，你没有报名该活动！');
+                                    native_accessor.send_sms(json_message.messages[0].phone, "对不起，你没有报名该活动！");
                                     break;
                                 }
                             }
                             else {
-                                console.log('对不起，你没有报名该活动！');
+//                                console.log('对不起，你没有报名该活动！');
+                                native_accessor.send_sms(json_message.messages[0].phone, "对不起，你没有报名该活动！");
                             }
                         }
                     }
                 }
                 else {
-                    console.log('活动尚未开始或已经结束！');
+//                    console.log('活动尚未开始或已经结束！');
+                    native_accessor.send_sms(json_message.messages[0].phone, "活动尚未开始或已经结束！");
                 }
             }
             else {
-                console.log('活动竞价尚未开始！');
+//                console.log('活动竞价尚未开始！');
+                native_accessor.send_sms(json_message.messages[0].phone, "活动竞价尚未开始！");
             }
         }
 

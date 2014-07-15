@@ -11,6 +11,7 @@ angular.module('card1App')
         var activities = JSON.parse(localStorage.getItem('activities'));
         var activityName = JSON.parse(localStorage.getItem('activityName'));
         var bid_name = JSON.parse(localStorage.getItem('bidName'));
+        $scope.colorStatus = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName}).colorStatus;
         $scope.back_to_bidding_list = function(){
             $location.path('bidding_list');
         };
@@ -20,6 +21,7 @@ angular.module('card1App')
                 bidList[0].colorStatus = 1;
                 localStorage.removeItem('bidName');
                 localStorage.setItem('bidList',JSON.stringify(bidList));
+                $location.path('bidding_result');
             }
         };
         $scope.fresh = function () {
