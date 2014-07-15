@@ -38,14 +38,12 @@ angular.module('card1App')
             localStorage.setItem('bidName',JSON.stringify(bid.name))
         };
         $scope.start = function(){
-            console.log(evens,'999999999999999');
             var bid = evens.length + 1;
-            console.log(bid,'0000000000000000000');
-            localStorage.setItem('bidName',JSON.stringify(bid))
-            var list = {'name': bid,'colorStatus':0,'activityName':activityName}
+            localStorage.setItem('bidName',JSON.stringify(bid));
+            var list = {'name': bid,'colorStatus':0,'activityName':activityName};
             bidList.unshift(list);
             localStorage.setItem('bidList',JSON.stringify(bidList));
-            $location.path('/bidding_sign_up')
+            $location.path('/bidding_sign_up');
         };
 
         $scope.evens = evens;

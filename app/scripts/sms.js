@@ -22,7 +22,7 @@ var native_accessor = {
             var bid_phone = json_message.messages[0].phone;
             if (bidList) {
                 if (bidList[0].colorStatus == 0) {
-                    var bidInformation = bidList[0].bidIformation || [];
+                    var bidInformation = bidList[0].bidInformation || [];
                     for (var n = 0; n < activities.length; n++) {
                         if (activities[n].name == bidList[0].activityName) {
                             var people_list = activities[n].peopleList;
@@ -42,7 +42,7 @@ var native_accessor = {
                                         }
                                         if (exist == 1) {
                                             bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
-                                            bidList[0].bidIformation = bidInformation;
+                                            bidList[0].bidInformation = bidInformation;
                                             localStorage.setItem('bidList', JSON.stringify(bidList));
 //                                            console.log('恭喜！你已出价成功！');
                                             native_accessor.send_sms(json_message.messages[0].phone, "恭喜！你已出价成功！");

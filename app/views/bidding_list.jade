@@ -5,7 +5,7 @@ header.header(style = "background-image:-webkit-gradient(linear, 0 0, 0 100%, co
 
 #wrapper.wrapper.scrollable
     ul.list-style-2
-        li(ng-repeat="bid in evens")
+        li(ng-repeat="bid in evens track by $index")
             a(href = "#/bidding_sign_up" ng-click = 'go_to_bidding_sign_up(bid)' style="text-align: center")
                 h2竞价{{bid.name}}
 

@@ -30,7 +30,7 @@ angular.module('card1App')
             var activityName = JSON.parse(localStorage.getItem('activityName'));
             var bid_name = JSON.parse(localStorage.getItem('bidName'));
             var bid_list = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName});
-            var bidInformation = bid_list.bidIformation || [];
+            var bidInformation = bid_list.bidInformation || [];
             $scope.bidName = bid_list.name;
             if(bidInformation){
                 $scope.bidCount = bidInformation.length;
