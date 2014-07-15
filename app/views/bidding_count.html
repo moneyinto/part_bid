@@ -3,6 +3,16 @@
     <button ng-click="back_to_bidding_list()" class="header-left btn btn-4 btn-primary">返回</button>
 </header>
 
+<div id="wrapper" class="wrapper scrollable">
+    <ul class="list-style-2">
+        <li ng-repeat="price in priceCount">
+            <h2><p style="font-size: 30px">￥{{price.bidPrice}}</p>
+
+                <p  style="font-size: 30px" class = "header-right">{{price.count}}</p></h2>
+        </li>
+    </ul>
+</div>
+
 <ul style="background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727)); margin-bottom: 0px;"
     class="footer-nav footer-nav-2tabs footer">
     <li><a href="#/bidding_result"  style="font-size: 30px;padding-top: 30px;padding-bottom: 30px;">竞价结果</a></li>
