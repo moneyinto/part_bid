@@ -12,10 +12,20 @@ angular.module('card1App')
             localStorage.removeItem('sucess');
             $location.path('bidding_list');
         };
+        var bidList = JSON.parse(localStorage.getItem('bidList'));
+        var bidInformation = bidList[0].bidInformation;
         var priceCount = JSON.parse(localStorage.getItem('priceCount'));
         var sucess = JSON.parse(localStorage.getItem('sucess'));
         $scope.priceCount = priceCount;
         $scope.sucessName = sucess.name;
         $scope.sucessPhone = sucess.phone;
-        $scope.sucessPrice = sucess.price
+        $scope.sucessPrice = sucess.price;
+        $scope.bidName = bidList[0].name;
+        if(bidInformation.length){
+            $scope.bidCount = bidInformation.length;
+        }
+        else{
+            $scope.bidCount = 0;
+        }
+
     });

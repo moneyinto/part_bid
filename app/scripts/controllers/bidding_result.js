@@ -57,5 +57,12 @@ angular.module('card1App')
         localStorage.setItem('sucess',JSON.stringify(sucess));
         $scope.sucessName = sucess.name;
         $scope.sucessPhone = sucess.phone;
-        $scope.sucessPrice = sucess.price
+        $scope.sucessPrice = sucess.price;
+        $scope.bidName = bidList[0].name;
+        if(bidInformation.length){
+            $scope.bidCount = bidInformation.length;
+        }
+        else{
+            $scope.bidCount = 0;
+        }
     });
