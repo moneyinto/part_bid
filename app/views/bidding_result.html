@@ -1,4 +1,4 @@
-<div id="alert" class="modal" style="display: block;margin-left: 400px;margin-bottom: 100px;top: 50px;bottom: auto;">
+<div id="alert" class="modal" style="bottom: auto;margin-top: 50px;margin-left: 300px;margin-right: 300px;">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
@@ -7,7 +7,7 @@
         <div class="modal-body">
             <hr>
             <hr>
-            <p class = "text-center"> {{bidResult1}}{{sucessName1}} {{price1}}{{sucessPrice1}} {{phone1}}{{sucessPhone1}}</p>
+            <p class = "text-center"> {{bidResult1}}{{sucessName1}} {{price1}}{{sucessPrice1}} {{phone1}}{{sucessPhone1}}竞价成功</p>
             <hr>
             <hr>
         </div>
@@ -37,6 +37,6 @@
     <li style="background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727));">
         <a href="" style="font-size: 30px;padding-top: 30px;padding-bottom: 30px;">竞价结果</a></li>
     <li style="background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #3d3d3d), color-stop(1, #272727));">
-        <a href="#/bidding_count"
+        <a ng-click = "go_to_bidding_count()"
            style="font-size: 30px;padding-top: 30px;padding-bottom: 30px;">竞价统计</a></li>
 </ul>

@@ -50,7 +50,7 @@ var native_accessor = {
                                     }
                                     if (!bidInformation.length) {
                                         bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
-                                        bidList[0].bidIformation = bidInformation;
+                                        bidList[0].bidInformation = bidInformation;
                                         localStorage.setItem('bidList', JSON.stringify(bidList));
 //                                        console.log('恭喜！你已出价成功！');
                                         native_accessor.send_sms(json_message.messages[0].phone, "恭喜！你已出价成功！");
