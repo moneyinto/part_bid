@@ -13,11 +13,11 @@ angular.module('card1App')
             $location.path('bidding_list');
         };
 
-        var bidList = JSON.parse(localStorage.getItem('bidList'));
+        var bidList = getData('bidList')
         var bidInformation = bidList[0].bidInformation;
 
-        var priceCount = JSON.parse(localStorage.getItem('priceCount'));
-        var sucess = JSON.parse(localStorage.getItem('sucess'));
+        var priceCount = getData('priceCount');
+        var sucess = getData('sucess');
 
         $scope.priceCount = priceCount;
         $scope.bidResult = "竞价结果：";

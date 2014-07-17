@@ -10,32 +10,27 @@ angular.module('card1App')
         $scope.back_to_list = function () {
             $location.path('/')
         };
-
-        $scope.activities = JSON.parse(localStorage.getItem('activities'));
+        $scope.activities = getData('activities');
 
         $scope.create = function () {
 
             var activityName = $scope.activityName;
 
-            var activities =  JSON.parse(localStorage.getItem('activities')) || [] ;
-
-            for (var i = 0; i < activities.length; i++) {
-
-                if (activityName == activities[i].name) {
-                    $scope.warning = '活动名称重复';
-                    break;
-                } else if (i + 1 == activities.length) {
-                    activities.unshift({'name' : activityName,'status':1});
-                    localStorage.setItem('activities', JSON.stringify(activities));
-                    localStorage.setItem('activityName',activityName);
-                    $location.path('/create_sign_up');
-                    break;
-                }
+            var activities =  getData('activities');
+            var even =_.find(activities,function(activity){return activity.name == activityName})
+            if(even){
+                $scope.warning = '活动名称重复';
+            }
+            if(!even){
+                activities.unshift({'name' : activityName,'status':1});
+                setData('activities',activities);
+                setData('activityName',activityName);
+                $location.path('/create_sign_up');
             }
             if (!activities.length) {
                 activities.unshift({'name': activityName,'status':1});
-                localStorage.setItem('activities', JSON.stringify(activities));
-                localStorage.setItem('activityName',activityName);
+                setData('activities',activities);
+                setData('activityName',activityName);
                 $location.path('/create_sign_up')
             }
         }

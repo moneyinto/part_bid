@@ -7,28 +7,28 @@ angular.module('card1App')
             'AngularJS',
             'Karma'
         ];
-        var bidList = JSON.parse(localStorage.getItem('bidList'));
-        var activities = JSON.parse(localStorage.getItem('activities'));
-        var activityName = JSON.parse(localStorage.getItem('activityName'));
-        var bid_name = JSON.parse(localStorage.getItem('bidName'));
+        var bidList = getData('bidList');
+        var activities = getData('activities');
+        var activityName = getData('activityName');
+        var bid_name = getData('bidName');
         $scope.colorStatus = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName}).colorStatus;
         $scope.back_to_bidding_list = function(){
             $location.path('bidding_list');
         };
         $scope.end = function(){
-            var bidList = JSON.parse(localStorage.getItem('bidList'));
+            var bidList = getData('bidList');
             if(confirm("确定要结束本次竞价？")){
                 bidList[0].colorStatus = 1;
                 localStorage.removeItem('bidName');
-                localStorage.setItem('bidList',JSON.stringify(bidList));
+                setData('bidList',bidList);
                 $location.path('bidding_result');
             }
         };
         $scope.fresh = function () {
-            var bidList = JSON.parse(localStorage.getItem('bidList'));
-            var activities = JSON.parse(localStorage.getItem('activities'));
-            var activityName = JSON.parse(localStorage.getItem('activityName'));
-            var bid_name = JSON.parse(localStorage.getItem('bidName'));
+            var bidList = getData('bidList');
+            var activities = getData('activities');
+            var activityName = getData('activityName');
+            var bid_name = getData('bidName');
             var bid_list = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName});
             var bidInformation = bid_list.bidInformation || [];
             $scope.bidName = bid_list.name;

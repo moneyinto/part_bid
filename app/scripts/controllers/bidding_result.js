@@ -12,9 +12,9 @@ angular.module('card1App')
             localStorage.removeItem('sucess');
             $location.path('bidding_list');
         };
-        var activities = JSON.parse(localStorage.getItem('activities'));
-        var activityName = JSON.parse(localStorage.getItem('activityName'));
-        var bidList = JSON.parse(localStorage.getItem('bidList'));
+        var activities = getData('activities');
+        var activityName = getData('activityName');
+        var bidList = getData('bidList');
         var bidInformation = bidList[0].bidInformation;
 
         var information = _.sortBy(bidInformation, function (num) {
@@ -35,51 +35,27 @@ angular.module('card1App')
 
         }
         $scope.peopleList = people_list;
+        var price_count = _.countBy(information, function (num) {
+            return num.bidPrice
+        });
+        var priceCount = _.map(price_count, function (value, key) {
+            return {'bidPrice': key, 'count': value}
+        });
 
-        var priceCount = [];
-        var n = 1;
-        if (information) {
-            if(information.length == 1){
-                priceCount.push({'bidPrice': information[0].bidPrice, 'count': 1});
-            }
-            else{
-                for (var i = 0; i < information.length; i++) {
-                    if (i == information.length - 1) {
-                        if (information[i].bidPrice == information[i - 1].bidPrice) {
-                            priceCount.push({'bidPrice': information[i].bidPrice, 'count': n});
-                            break;
-                        }
-                        else {
-                            priceCount.push({'bidPrice': information[i].bidPrice, 'count': n});
-                        }
-                    }
-                    else {
-                        if (information[i].bidPrice == information[i + 1].bidPrice) {
-                            n = n + 1;
-                        }
-                        else {
-                            priceCount.push({'bidPrice': information[i].bidPrice, 'count': n});
-                            n = 1;
-                        }
-                    }
-                }
-            }
-
-        }
-        localStorage.setItem('priceCount', JSON.stringify(priceCount));
+        setData('priceCount', priceCount);
 
         if (priceCount) {
             var bidSuccess = _.find(priceCount, function (num) {
                 return num.count == 1
             });
-            if(bidSuccess){
+            if (bidSuccess) {
                 var sucess = _.find(people_list, function (num) {
                     return num.price == bidSuccess.bidPrice
                 });
             }
 
         }
-        localStorage.setItem('sucess', JSON.stringify(sucess));
+        setData('sucess', sucess);
         if (sucess) {
             $('#alert').modal('show');
             $scope.bidResult1 = "竞价结果：";
@@ -111,8 +87,8 @@ angular.module('card1App')
         else {
             $scope.bidCount = 0;
         }
-        $scope.go_to_bidding_count = function(){
-            if(sucess){
+        $scope.go_to_bidding_count = function () {
+            if (sucess) {
                 $location.path('bidding_count');
             }
         }

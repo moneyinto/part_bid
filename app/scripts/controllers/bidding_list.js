@@ -8,9 +8,9 @@ angular.module('card1App')
             'Karma'
         ];
         $scope.status = 1;
-        var activities = JSON.parse(localStorage.getItem('activities'));
-        var activityName = JSON.parse(localStorage.getItem('activityName'));
-        var bidList = JSON.parse(localStorage.getItem('bidList')) || [] ;
+        var activities = getData('activities');
+        var activityName = getData('activityName');
+        var bidList = getData('bidList');
         var evens = _.filter(bidList, function(activity){ return  activity.activityName == activityName });
         var even = _.find(bidList,function(num){ return num.colorStatus == 0});
         if(even){
@@ -24,25 +24,18 @@ angular.module('card1App')
                 $scope.status = 0;
             }
         }
-//        if(evens.length){
-//            $scope.colorStatus = evens[0].colorStatus;
-//        }
-//        else{
-//            $scope.colorStatus = 1;
-//        }
-
         $scope.back_to_activity_list = function(){
             $location.path('/activity_list');
         };
         $scope.go_to_bidding_sign_up = function(bid){
-            localStorage.setItem('bidName',JSON.stringify(bid.name))
+            setData('bidName',bid.name);
         };
         $scope.start = function(){
             var bid = evens.length + 1;
-            localStorage.setItem('bidName',JSON.stringify(bid));
+            setData('bidName',bid);
             var list = {'name': bid,'colorStatus':0,'activityName':activityName};
             bidList.unshift(list);
-            localStorage.setItem('bidList',JSON.stringify(bidList));
+            setData('bidList',bidList);
             $location.path('/bidding_sign_up');
         };
 

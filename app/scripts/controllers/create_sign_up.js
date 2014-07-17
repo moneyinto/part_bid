@@ -10,89 +10,75 @@ angular.module('card1App')
         $scope.back_to_list = function () {
             $location.path('/create_list')
         };
-        var activities = JSON.parse(localStorage.getItem('activities')) || [];
-        var activityName = JSON.parse(localStorage.getItem('activityName'));
-        var bidList = JSON.parse(localStorage.getItem('bidList')) || [];
-        if(bidList.length){
+        var activities = getData('activities');
+        var activityName = getData('activityName');
+        var bidList = getData('bidList');
+        if (bidList.length) {
             $scope.colorStatus = bidList[0].colorStatus;
         }
-        else{
+        if (!bidList.length) {
             $scope.colorStatus = 1;
         }
 
         if (!activityName) {
             $scope.status = 1;
         }
-        else {
-            for (var i = 0; i < activities.length; i++) {
-                if (activities[i].name == activityName) {
-                    $scope.status = activities[i].status;
-                    break;
-                }
-            }
+        if (activityName) {
+            $scope.status = _.find(activities, function (activity) {
+                return activity.name == activityName
+            }).status;
         }
-
-        for (var j = 0; j < activities.length;j++) {
-            if (activities[j].status == 0) {
-                    $scope.check = 1;
-                    break;
-            }
-            else {
-                $scope.check = 0;
-            }
+        var even = _.find(activities, function (activity) {
+            return activity.status == 0
+        });
+        if (even) {
+            $scope.check = 1;
+        }
+        if (!even) {
+            $scope.check = 0;
         }
         $scope.start = function () {
-            for (var i = 0; i < activities.length; i++) {
-                if (activities[i].name == activityName) {
-                    $scope.status = activities[i].status = 0;
-                    var startActivity = {'startActivity': activityName};
-                    localStorage.setItem('startActivity', JSON.stringify(startActivity));
-                    localStorage.setItem('activities', JSON.stringify(activities));
-                    break;
-                }
+            var even = _.find(activities, function (activity) {
+                return activity.name == activityName
+            });
+            if (even) {
+                even.status = 0;
+                $scope.status = 0;
+                setData('startActivity',{'startActivity':activityName});
+                setData('activities', activities);
             }
         };
-
-
-//        $scope.bidding = function () {
-//            $scope.start = 0;
-//            $location.path('/bidding_list');
-//        };
-
         $scope.refresh = function () {
-//            console.log('1111');
-            var activities = JSON.parse(localStorage.getItem('activities'));
-            var activityName = JSON.parse(localStorage.getItem('activityName'));
-            for (var i = 0; i < activities.length; i++) {
-                if (activities[i].name == activityName) {
-                    var peopleList = activities[i].peopleList || [];
-                    $scope.peopleList = activities[i].peopleList;
-                    if (peopleList.length) {
-                        $scope.peopleCount = peopleList.length;
-                    }
-                    else {
-                        $scope.peopleCount = 0;
-                    }
-                    break;
+            var activities = getData('activities');
+            var activityName = getData('activityName');
+            var even = _.find(activities, function (activity) {
+                return activity.name == activityName
+            });
+            if(even){
+                var peopleList = even.peopleList || [];
+                $scope.peopleList = even.peopleList;
+                if (peopleList.length) {
+                    $scope.peopleCount = peopleList.length;
+                }
+                else {
+                    $scope.peopleCount = 0;
                 }
             }
         };
         $scope.refresh();
-        localStorage.setItem('activities', JSON.stringify(activities));
+        setData('activities', activities);
         $scope.end = function () {
-            var activities = JSON.parse(localStorage.getItem('activities'));
+            var activities = getData('activities');
             if (confirm("确认要结束本次报名吗？")) {
                 $scope.check = 0;
-                for (var i = 0; i < activities.length; i++) {
-                    if (activities[i].name == activityName) {
-                        console.log(activities[i]);
-                        $scope.status = activities[i].status = 1;
-                        localStorage.removeItem('startActivity');
-                        console.log(activities[i]);
-                        localStorage.setItem('activities', JSON.stringify(activities));
-                        $location.path('/bidding_list');
-                        break;
-                    }
+                var even = _.find(activities, function (activity) {
+                    return activity.name == activityName
+                });
+                if(even) {
+                    $scope.status = even.status = 1;
+                    localStorage.removeItem('startActivity');
+                    setData('activities', activities);
+                    $location.path('/bidding_list');
                 }
             }
 

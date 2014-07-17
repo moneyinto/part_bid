@@ -7,35 +7,18 @@ angular.module('card1App')
             'AngularJS',
             'Karma'
         ];
-        var activities = JSON.parse(localStorage.getItem('activities')) || [];
-
-        var bidList = JSON.parse(localStorage.getItem('bidList')) || [] ;
-        for(var i = 0;i < activities.length;i++){
-            var evens = _.filter(bidList, function(activity){ return  activity.activityName == activities[i].name; });
-            console.log(evens.length);
-            if(evens.length){
-                activities[i].colorStatus = evens[0].colorStatus;
-            }
-            else{
-                activities[i].colorStatus = 1;
-            }
-
+        if(AL.go_to_create_activity()){
+            $location.path('/create_activity');
         }
-        console.log(activities);
-        $scope.activities = activities;
 
-        if (activities.length) {
-            $location.path('/')
-        }
-        else {
-            $location.path('/create_activity')
-        }
+        $scope.activities = AL.yellow_when_bidding_start();
+
         $scope.go_to_activity = function () {
             $location.path('/create_activity')
         };
+
         $scope.go_to_sign_up = function (activity) {
             var activityName = activity.name;
-            localStorage.setItem('activityName' , JSON.stringify(activityName))
+            setData('activityName',activityName);
         };
-        console.log(activities);
     });
