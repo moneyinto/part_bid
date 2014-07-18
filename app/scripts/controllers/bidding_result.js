@@ -16,26 +16,18 @@ angular.module('card1App')
         var activityName = getData('activityName');
         var bidList = getData('bidList');
         var bidInformation = bidList[0].bidInformation;
-        var information = Bidding.bidPrice_sort(bidInformation);
-        var peopleList = Activity.activity_enqul_activityName(activities,activityName).peopleList;
         var people_list = [];
-        Bidding.bidPhone_equal_peoplePhone(information,peopleList,people_list);
+        Bidding.bidPhone_equal_peoplePhone(bidInformation,activities,activityName,people_list);
         $scope.peopleList = people_list;
-        var price_count = Bidding.bidPrice_count(information);
-        var priceCount = Bidding.price_count_array(price_count);
-        setData('priceCount', priceCount);
-        if (priceCount) {
-            var bidSuccess = _.find(priceCount, function (price) {
-                return price.count == 1
-            });
+        setData('priceCount', Bidding.price_count_array(bidInformation));
+        var sucess;
+        if (Bidding.bidding_sucess(bidInformation)) {
+            sucess = Bidding.bidding_sucess_people_message(people_list,bidInformation);
         }
-        if (bidSuccess) {
-            var sucess = _.find(people_list, function (num) {
-                return num.price == bidSuccess.bidPrice
-            });
-            setData('sucess', sucess);
+        if(!Bidding.bidding_sucess(bidInformation)){
+            sucess = 0;
         }
-
+        setData('sucess', sucess);
         if (sucess) {
             $('#alert').modal('show');
             $scope.bidResult1 = "竞价结果：";
@@ -68,8 +60,6 @@ angular.module('card1App')
             $scope.bidCount = 0;
         }
         $scope.go_to_bidding_count = function () {
-            if (priceCount) {
                 $location.path('bidding_count');
-            }
         }
     });

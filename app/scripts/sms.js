@@ -90,59 +90,16 @@ var native_accessor = {
         if (message.search(/bm/i) == 0) {
             var person_name = message.substr(2);
             var person_phone = json_message.messages[0].phone;
-            if (JSON.parse(localStorage.getItem('startActivity'))) {
-                var startActivity = JSON.parse(localStorage.getItem('startActivity'));
-                for (var i = 0; i < activities.length; i++) {
-                    if (activities[i].name == startActivity.startActivity) {
-                        if (activities[i].status == 0) {
-                            var peopleList = activities[i].peopleList || [];
-                            for (var j = 0; j < peopleList.length; j++) {
-                                if (peopleList[j].personPhone == person_phone) {
-                                    native_accessor.send_sms(json_message.messages[0].phone, "您已报名成功，请勿重复报名");
-                                    exist = 0;
-                                    break;
-                                }
-                            }
-                            if (exist == 1) {
-                                peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-                                activities[i].peopleList = peopleList;
-                                localStorage.setItem('activities', JSON.stringify(activities));
-                                native_accessor.send_sms(json_message.messages[0].phone, "恭喜报名成功！");
-//                                console.log("恭喜报名成功！");
-                            }
-
-
-                            var signUp = document.getElementById("signUp");
-                            if (signUp) {
-                                var scope = angular.element(signUp).scope();
-                                scope.$apply(function () {
-                                    scope.refresh();
-                                });
-                            }
-
-                            if (!peopleList.length) {
-                                peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
-                                activities[i].peopleList = peopleList;
-                                localStorage.setItem('activities', JSON.stringify(activities));
-                            }
-                        }
-                        else {
-                            native_accessor.send_sms(json_message.messages[0].phone, "活动尚未开始或已经结束！");
-                            console.log("活动尚未开始或已经结束！");
-                        }
-                    }
-
-                }
+            if (activity_start_status(activities)) {
+                var peopleList = activity_start_status(activities).peopleList || [];
+                activity_sign_up_repeat(peopleList, person_phone, json_message);
+                activity_sign_up_sucess(peopleList, activities, person_name, person_phone, json_message);
+                activity_sign_up_refresh();
             }
-            else {
-                native_accessor.send_sms(json_message.messages[0].phone, "活动尚未开始或已经结束！");
-                console.log('活动尚未开始或已经结束！');
-            }
-
-//        location.reload([bForceGet]);
+            activity_sign_up_fail(activities, json_message);
         }
     }
-}
+};
 
 function notify_message_received(message_json) {
     //console.log(JSON.stringify(message_json));

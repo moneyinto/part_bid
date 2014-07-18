@@ -16,17 +16,16 @@ angular.module('card1App')
         var bidList = getData('bidList')
         var bidInformation = bidList[0].bidInformation;
         var priceCount = getData('priceCount');
-        var sucess = getData('sucess');
-
+        var sucess = JSON.parse(localStorage.sucess);
+        if (sucess) {
+            $scope.bidResult = "竞价结果：";
+            $scope.phone = "电话：";
+            $scope.price = "竞价：￥";
+            $scope.sucessName = sucess.name;
+            $scope.sucessPhone = sucess.phone;
+            $scope.sucessPrice = sucess.price;
+        }
         $scope.priceCount = priceCount;
-        $scope.bidResult = "竞价结果：";
-        $scope.phone = "电话：";
-        $scope.price = "竞价：￥";
-        $scope.sucessName = sucess.name;
-        $scope.sucessPhone = sucess.phone;
-        $scope.sucessPrice = sucess.price;
-
-
         $scope.bidName = bidList[0].name;
         if (bidInformation) {
             $scope.bidCount = bidInformation.length;

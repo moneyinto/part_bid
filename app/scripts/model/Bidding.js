@@ -48,23 +48,35 @@ Bidding.bidPrice_sort = function(bidInformation){
     })
 };
 
-Bidding.bidPhone_equal_peoplePhone = function(information,peopleList,people_list){
-    _.map(information,function(infor){
-        var list = _.find(peopleList, function (num) {
+Bidding.bidPhone_equal_peoplePhone = function(bidInformation,activities,activityName,people_list){
+    _.map(Bidding.bidPrice_sort(bidInformation),function(infor){
+        var list = _.find(Activity.activity_enqul_activityName(activities,activityName).peopleList, function (num) {
             return num.personPhone == infor.bidPhone
         });
         people_list.push({'name': list.personName, 'phone': list.personPhone, 'price': infor.bidPrice});
     });
 };
 
-Bidding.bidPrice_count = function(information){
-    return _.countBy(information, function (num) {
+Bidding.bidPrice_count = function(bidInformation){
+    return _.countBy(Bidding.bidPrice_sort(bidInformation), function (num) {
         return num.bidPrice
     })
 };
 
-Bidding.price_count_array = function(price_count){
-    return _.map(price_count, function (value, key) {
+Bidding.price_count_array = function(bidInformation){
+    return _.map(Bidding.bidPrice_count(bidInformation), function (value, key) {
         return {'bidPrice': key, 'count': value}
+    })
+};
+
+Bidding.bidding_sucess = function(bidInformation){
+    return _.find(Bidding.price_count_array(bidInformation), function (price) {
+        return price.count == 1
+    })
+};
+
+Bidding.bidding_sucess_people_message = function(people_list,bidInformation){
+    return _.find(people_list, function (num) {
+        return num.price == Bidding.bidding_sucess(bidInformation).bidPrice
     })
 };
