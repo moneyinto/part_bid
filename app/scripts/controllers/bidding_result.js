@@ -9,7 +9,7 @@ angular.module('card1App')
         ];
         $scope.back_to_bidding_list = function () {
             localStorage.removeItem('priceCount');
-            localStorage.removeItem('sucess');
+            localStorage.removeItem('success');
             $location.path('bidding_list');
         };
         var activities = getData('activities');
@@ -20,22 +20,22 @@ angular.module('card1App')
         Bidding.bidPhone_equal_peoplePhone(bidInformation,activities,activityName,people_list);
         $scope.peopleList = people_list;
         setData('priceCount', Bidding.price_count_array(bidInformation));
-        var sucess;
-        if (Bidding.bidding_sucess(bidInformation)) {
-            sucess = Bidding.bidding_sucess_people_message(people_list,bidInformation);
+        var success;
+        if (Bidding.bidding_success(bidInformation)) {
+            success = Bidding.bidding_success_people_message(people_list,bidInformation);
         }
-        if(!Bidding.bidding_sucess(bidInformation)){
-            sucess = 0;
+        if(!Bidding.bidding_success(bidInformation)){
+            success = 0;
         }
-        setData('sucess', sucess);
-        if (sucess) {
+        setData('success', success);
+        if (success) {
             $('#alert').modal('show');
             $scope.bidResult1 = "竞价结果：";
             $scope.phone1 = "电话：";
             $scope.price1 = "竞价：￥";
-            $scope.sucessName1 = sucess.name;
-            $scope.sucessPhone1 = sucess.phone;
-            $scope.sucessPrice1 = sucess.price;
+            $scope.sucessName1 = success.name;
+            $scope.sucessPhone1 = success.phone;
+            $scope.sucessPrice1 = success.price;
             setTimeout(function () {
                 $scope.$apply(function () {
                     $('#alert').modal('hide');
@@ -46,9 +46,9 @@ angular.module('card1App')
                     $scope.bidResult = "竞价结果：";
                     $scope.phone = "电话：";
                     $scope.price = "竞价：￥";
-                    $scope.sucessName = sucess.name;
-                    $scope.sucessPhone = sucess.phone;
-                    $scope.sucessPrice = sucess.price;
+                    $scope.sucessName = success.name;
+                    $scope.sucessPhone = success.phone;
+                    $scope.sucessPrice = success.price;
                 });
             }, 3000);
         }

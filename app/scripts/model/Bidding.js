@@ -69,14 +69,14 @@ Bidding.price_count_array = function(bidInformation){
     })
 };
 
-Bidding.bidding_sucess = function(bidInformation){
+Bidding.bidding_success = function(bidInformation){
     return _.find(Bidding.price_count_array(bidInformation), function (price) {
         return price.count == 1
     })
 };
 
-Bidding.bidding_sucess_people_message = function(people_list,bidInformation){
+Bidding.bidding_success_people_message = function(people_list,bidInformation){
     return _.find(people_list, function (num) {
-        return num.price == Bidding.bidding_sucess(bidInformation).bidPrice
+        return num.price == Bidding.bidding_success(bidInformation).bidPrice
     })
 };

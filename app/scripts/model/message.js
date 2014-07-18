@@ -52,3 +52,23 @@ activity_sign_up_fail = function(activities,json_message){
         native_accessor.send_sms(json_message.messages[0].phone, "活动尚未开始或已经结束！");
     }
 };
+
+bid_phone_equal_people_phone = function(activities,bidList,bid_phone){
+    return _.find(bid_name_equal_activity_name(activities,bidList).peopleList, function (person_phone) {
+        return person_phone.personPhone == bid_phone
+    })
+};
+
+bid_name_equal_activity_name = function(activities,bidList){
+    return _.find(activities,function(activity){return activity.name == bidList[0].activityName})
+};
+
+bid_phone_repeat = function(bidInformation,bid_phone){
+    return _.find(bidInformation,function(infor){ return infor.bidPhone == bid_phone})
+};
+
+bid_success = function(bidInformation,bid_price,bid_phone,bidList){
+    bidInformation.unshift({'bidPrice': bid_price, 'bidPhone': bid_phone});
+    bidList[0].bidInformation = bidInformation;
+    setData('bidList', bidList);
+};
