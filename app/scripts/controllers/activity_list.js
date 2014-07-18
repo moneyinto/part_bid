@@ -7,11 +7,13 @@ angular.module('card1App')
             'AngularJS',
             'Karma'
         ];
-        if(AL.go_to_create_activity()){
+        var activities = getData('activities');
+        var bidList = getData('bidList');
+        if(Activity.go_to_create_activity(activities)){
             $location.path('/create_activity');
         }
 
-        $scope.activities = AL.yellow_when_bidding_start();
+        $scope.activities = Activity.yellow_when_bidding_start(activities,bidList);
 
         $scope.go_to_activity = function () {
             $location.path('/create_activity')

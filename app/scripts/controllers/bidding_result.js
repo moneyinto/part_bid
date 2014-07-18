@@ -16,46 +16,26 @@ angular.module('card1App')
         var activityName = getData('activityName');
         var bidList = getData('bidList');
         var bidInformation = bidList[0].bidInformation;
-
-        var information = _.sortBy(bidInformation, function (num) {
-            return num.bidPrice
-        });
-        var even = _.find(activities, function (num) {
-            return num.name == activityName
-        });
-
-        var peopleList = even.peopleList;
+        var information = Bidding.bidPrice_sort(bidInformation);
+        var peopleList = Activity.activity_enqul_activityName(activities,activityName).peopleList;
         var people_list = [];
-
-        for (var j = 0; j < information.length; j++) {
-            var list = _.find(peopleList, function (num) {
-                return num.personPhone == information[j].bidPhone
-            });
-            people_list.push({'name': list.personName, 'phone': list.personPhone, 'price': information[j].bidPrice});
-
-        }
+        Bidding.bidPhone_equal_peoplePhone(information,peopleList,people_list);
         $scope.peopleList = people_list;
-        var price_count = _.countBy(information, function (num) {
-            return num.bidPrice
-        });
-        var priceCount = _.map(price_count, function (value, key) {
-            return {'bidPrice': key, 'count': value}
-        });
-
+        var price_count = Bidding.bidPrice_count(information);
+        var priceCount = Bidding.price_count_array(price_count);
         setData('priceCount', priceCount);
-
         if (priceCount) {
-            var bidSuccess = _.find(priceCount, function (num) {
-                return num.count == 1
+            var bidSuccess = _.find(priceCount, function (price) {
+                return price.count == 1
             });
-            if (bidSuccess) {
-                var sucess = _.find(people_list, function (num) {
-                    return num.price == bidSuccess.bidPrice
-                });
-            }
-
         }
-        setData('sucess', sucess);
+        if (bidSuccess) {
+            var sucess = _.find(people_list, function (num) {
+                return num.price == bidSuccess.bidPrice
+            });
+            setData('sucess', sucess);
+        }
+
         if (sucess) {
             $('#alert').modal('show');
             $scope.bidResult1 = "竞价结果：";
@@ -84,11 +64,11 @@ angular.module('card1App')
         if (bidInformation) {
             $scope.bidCount = bidInformation.length;
         }
-        else {
+        if (!bidInformation){
             $scope.bidCount = 0;
         }
         $scope.go_to_bidding_count = function () {
-            if (sucess) {
+            if (priceCount) {
                 $location.path('bidding_count');
             }
         }

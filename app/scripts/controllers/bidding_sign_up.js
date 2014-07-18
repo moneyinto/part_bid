@@ -11,16 +11,14 @@ angular.module('card1App')
         var activities = getData('activities');
         var activityName = getData('activityName');
         var bid_name = getData('bidName');
-        $scope.colorStatus = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName}).colorStatus;
+        $scope.colorStatus = Bidding.bidding_sign_up_end_status(bidList,bid_name,activityName);
         $scope.back_to_bidding_list = function(){
             $location.path('bidding_list');
         };
         $scope.end = function(){
             var bidList = getData('bidList');
             if(confirm("确定要结束本次竞价？")){
-                bidList[0].colorStatus = 1;
-                localStorage.removeItem('bidName');
-                setData('bidList',bidList);
+                Bidding.end_sucess(bidList);
                 $location.path('bidding_result');
             }
         };
@@ -29,23 +27,18 @@ angular.module('card1App')
             var activities = getData('activities');
             var activityName = getData('activityName');
             var bid_name = getData('bidName');
-            var bid_list = _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName});
+            var bid_list = Bidding.bidName_equal_activityName(bidList,activityName,bid_name);
             var bidInformation = bid_list.bidInformation || [];
             $scope.bidName = bid_list.name;
             if(bidInformation){
                 $scope.bidCount = bidInformation.length;
             }
-            else{
+            if(!bidInformation){
                 $scope.bidCount = 0;
             }
-            var even = _.find(activities, function(activity){ return activity.name == activityName; });
-            var peopleList = even.peopleList;
+            var peopleList = Activity.activity_enqul_activityName(activities,activityName).peopleList;
             var bidPeople = [];
-            for (var i = 0;i < bidInformation.length;i++){
-                var bidPhone = bidInformation[i].bidPhone;
-                var personInformation = _.find(peopleList, function(num){ return num.personPhone == bidPhone; });
-                bidPeople.push(personInformation);
-            }
+            Bidding.get_bidPrice(bidInformation,peopleList,bidPeople);
             $scope.bidPeople = bidPeople;
         };
         $scope.fresh();

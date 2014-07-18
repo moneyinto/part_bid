@@ -11,35 +11,28 @@ angular.module('card1App')
         var activities = getData('activities');
         var activityName = getData('activityName');
         var bidList = getData('bidList');
-        var evens = _.filter(bidList, function(activity){ return  activity.activityName == activityName });
-        var even = _.find(bidList,function(num){ return num.colorStatus == 0});
-        if(even){
+        if (Bidding.bidding_start_status(bidList)) {
             $scope.colorStatus = 0;
         }
-        else{
+        if (!Bidding.bidding_start_status(bidList)) {
             $scope.colorStatus = 1;
         }
-        for (var i = 0;i < activities.length;i++){
-            if(activities[i].status == 0){
-                $scope.status = 0;
-            }
+
+        if (activity_start_status(activities)) {
+            $scope.status = 0;
         }
-        $scope.back_to_activity_list = function(){
+        $scope.back_to_activity_list = function () {
             $location.path('/activity_list');
         };
-        $scope.go_to_bidding_sign_up = function(bid){
-            setData('bidName',bid.name);
+        $scope.go_to_bidding_sign_up = function (bid) {
+            setData('bidName', bid.name);
         };
-        $scope.start = function(){
-            var bid = evens.length + 1;
-            setData('bidName',bid);
-            var list = {'name': bid,'colorStatus':0,'activityName':activityName};
-            bidList.unshift(list);
-            setData('bidList',bidList);
+        $scope.start = function () {
+            Bidding.bidding_create(bidList,activityName);
             $location.path('/bidding_sign_up');
         };
 
-        $scope.evens = evens;
+        $scope.evens = Bidding.bidding_in_activity(bidList,activityName);
 
 
     });

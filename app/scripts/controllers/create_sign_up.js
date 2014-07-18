@@ -24,43 +24,33 @@ angular.module('card1App')
             $scope.status = 1;
         }
         if (activityName) {
-            $scope.status = _.find(activities, function (activity) {
-                return activity.name == activityName
-            }).status;
+            $scope.status = Activity.activity_enqul_activityName(activities, activityName).status;
         }
-        var even = _.find(activities, function (activity) {
-            return activity.status == 0
-        });
-        if (even) {
+
+        if (activity_start_status(activities)) {
             $scope.check = 1;
         }
-        if (!even) {
+        if (!activity_start_status(activities)) {
             $scope.check = 0;
         }
         $scope.start = function () {
-            var even = _.find(activities, function (activity) {
-                return activity.name == activityName
-            });
-            if (even) {
-                even.status = 0;
+
+            if (Activity.activity_enqul_activityName(activities, activityName)) {
+                Activity.activity_enqul_activityName(activities, activityName).status = 0;
                 $scope.status = 0;
-                setData('startActivity',{'startActivity':activityName});
                 setData('activities', activities);
             }
         };
         $scope.refresh = function () {
             var activities = getData('activities');
             var activityName = getData('activityName');
-            var even = _.find(activities, function (activity) {
-                return activity.name == activityName
-            });
-            if(even){
-                var peopleList = even.peopleList || [];
-                $scope.peopleList = even.peopleList;
+            if (Activity.activity_enqul_activityName(activities, activityName)) {
+                var peopleList = Activity.activity_enqul_activityName(activities, activityName).peopleList || [];
+                $scope.peopleList = Activity.activity_enqul_activityName(activities, activityName).peopleList;
                 if (peopleList.length) {
                     $scope.peopleCount = peopleList.length;
                 }
-                else {
+                if (!peopleList.length) {
                     $scope.peopleCount = 0;
                 }
             }
@@ -71,12 +61,8 @@ angular.module('card1App')
             var activities = getData('activities');
             if (confirm("确认要结束本次报名吗？")) {
                 $scope.check = 0;
-                var even = _.find(activities, function (activity) {
-                    return activity.name == activityName
-                });
-                if(even) {
-                    $scope.status = even.status = 1;
-                    localStorage.removeItem('startActivity');
+                if (Activity.activity_enqul_activityName(activities, activityName)) {
+                    $scope.status = Activity.activity_enqul_activityName(activities, activityName).status = 1;
                     setData('activities', activities);
                     $location.path('/bidding_list');
                 }

@@ -13,25 +13,14 @@ angular.module('card1App')
         $scope.activities = getData('activities');
 
         $scope.create = function () {
-
             var activityName = $scope.activityName;
-
             var activities =  getData('activities');
-            var even =_.find(activities,function(activity){return activity.name == activityName})
-            if(even){
+            if(Activity.activity_enqul_activityName(activities,activityName)){
                 $scope.warning = '活动名称重复';
             }
-            if(!even){
-                activities.unshift({'name' : activityName,'status':1});
-                setData('activities',activities);
-                setData('activityName',activityName);
+            if(!Activity.activity_enqul_activityName(activities,activityName)){
+                Activity.create_activity_sucess(activities,activityName);
                 $location.path('/create_sign_up');
-            }
-            if (!activities.length) {
-                activities.unshift({'name': activityName,'status':1});
-                setData('activities',activities);
-                setData('activityName',activityName);
-                $location.path('/create_sign_up')
             }
         }
 

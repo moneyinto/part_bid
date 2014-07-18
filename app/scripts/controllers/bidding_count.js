@@ -15,7 +15,6 @@ angular.module('card1App')
 
         var bidList = getData('bidList')
         var bidInformation = bidList[0].bidInformation;
-
         var priceCount = getData('priceCount');
         var sucess = getData('sucess');
 
@@ -31,10 +30,8 @@ angular.module('card1App')
         $scope.bidName = bidList[0].name;
         if (bidInformation) {
             $scope.bidCount = bidInformation.length;
-            $scope.a = "#/bidding_count";
         }
-        else {
-            $scope.a = "";
+        if (!bidInformation) {
             $scope.bidCount = 0;
         }
 
