@@ -34,8 +34,8 @@ Bidding.bidName_equal_activityName = function(bidList,activityName,bid_name){
     return _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName})
 };
 
-Bidding.get_bidPrice = function(bidInformation,peopleList,bidPeople){
-    _.map(bidInformation,function(infor){
+Bidding.get_bidPrice = function(bidList,activityName,bid_name,peopleList,bidPeople){
+    _.map(Bidding.bidName_equal_activityName(bidList,activityName,bid_name).bidInformation,function(infor){
         var bidPhone = infor.bidPhone;
         var personInformation = _.find(peopleList, function(num){ return num.personPhone == bidPhone; });
         bidPeople.push(personInformation);

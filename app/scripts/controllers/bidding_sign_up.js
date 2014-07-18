@@ -27,18 +27,16 @@ angular.module('card1App')
             var activities = getData('activities');
             var activityName = getData('activityName');
             var bid_name = getData('bidName');
-            var bid_list = Bidding.bidName_equal_activityName(bidList,activityName,bid_name);
-            var bidInformation = bid_list.bidInformation || [];
-            $scope.bidName = bid_list.name;
-            if(bidInformation){
-                $scope.bidCount = bidInformation.length;
+            $scope.bidName = Bidding.bidName_equal_activityName(bidList,activityName,bid_name).name;
+            if(Bidding.bidName_equal_activityName(bidList,activityName,bid_name).bidInformation){
+                $scope.bidCount = Bidding.bidName_equal_activityName(bidList,activityName,bid_name).bidInformation.length;
             }
-            if(!bidInformation){
+            if(!Bidding.bidName_equal_activityName(bidList,activityName,bid_name).bidInformation){
                 $scope.bidCount = 0;
             }
             var peopleList = Activity.activity_enqul_activityName(activities,activityName).peopleList;
             var bidPeople = [];
-            Bidding.get_bidPrice(bidInformation,peopleList,bidPeople);
+            Bidding.get_bidPrice(bidList,activityName,bid_name,peopleList,bidPeople);
             $scope.bidPeople = bidPeople;
         };
         $scope.fresh();
