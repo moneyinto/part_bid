@@ -13,16 +13,14 @@ angular.module('card1App')
         $scope.activities = getData('activities');
 
         $scope.create = function () {
-            var activityName = $scope.activityName;
-            var activities =  getData('activities');
-            if(Activity.activity_equal_activityName(activities,activityName)){
+            var activity_name = $scope.activityName;
+            if(Activity.activity_equal_activity_name(activity_name)){
                 $scope.warning = '活动名称重复';
             }
-            if(!Activity.activity_equal_activityName(activities,activityName)){
-                Activity.create_activity_success(activities,activityName);
+            if(!Activity.activity_equal_activity_name(activity_name)){
+                Activity.create_activity_success(activity_name);
                 $location.path('/create_sign_up');
             }
         }
-
     });
 

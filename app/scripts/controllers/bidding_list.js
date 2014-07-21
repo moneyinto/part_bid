@@ -8,13 +8,13 @@ angular.module('card1App')
             'Karma'
         ];
         $scope.status = 1;
-        var activities = getData('activities');
+
         var activityName = getData('activityName');
         var bidList = getData('bidList');
 
         $scope.colorStatus = Bidding.bidding_start_status(bidList) ? 0 : 1;
 
-        if (activity_start_status(activities)) {
+        if (activity_start_status()) {
             $scope.status = 0;
         }
 

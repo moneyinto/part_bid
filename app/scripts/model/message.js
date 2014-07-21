@@ -18,7 +18,8 @@ activity_sign_up_refresh = function(){
     }
 };
 
-activity_start_status = function(activities){
+activity_start_status = function(){
+    var activities = getData('activities');
     return _.find(activities, function (activity) {
         return activity.status == 0
     });
@@ -32,7 +33,7 @@ activity_phone_repeat = function(peopleList,person_phone){
     })
 };
 
-activity_sign_up_sucess = function(peopleList,activities,person_name,person_phone,json_message){
+activity_sign_up_success = function(peopleList,activities,person_name,person_phone,json_message){
     if (!activity_phone_repeat(peopleList, person_phone)) {
         peopleList.unshift({'personName': person_name, 'personPhone': person_phone});
         activity_start_status(activities).peopleList = peopleList;
