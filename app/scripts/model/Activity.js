@@ -50,3 +50,13 @@ Activity.create_activity = function(activity_name,$location){
         $location.path('/create_sign_up');
     }
 };
+
+Activity.activity_sign_up_end = function($scope,$location){
+    var activities = getData('activities');
+    if (confirm("确认要结束本次报名吗？")) {
+        $scope.check = 0;
+        $scope.status = Activity.activity_equal_activityName(activities).status = 1;
+        setData('activities', activities);
+        $location.path('/bidding_list');
+    }
+};
