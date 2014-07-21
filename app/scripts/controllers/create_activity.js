@@ -14,13 +14,8 @@ angular.module('card1App')
 
         $scope.create = function () {
             var activity_name = $scope.activityName;
-            if(Activity.activity_equal_activity_name(activity_name)){
-                $scope.warning = '活动名称重复';
-            }
-            if(!Activity.activity_equal_activity_name(activity_name)){
-                Activity.create_activity_success(activity_name);
-                $location.path('/create_sign_up');
-            }
+            Activity.activity_repeat(activity_name,$scope);
+            Activity.create_activity(activity_name,$location);
         }
     });
 

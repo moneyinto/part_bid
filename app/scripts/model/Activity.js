@@ -38,3 +38,15 @@ Activity.create_activity_success = function(activity_name){
     setData('activityName',activity_name);
 };
 
+Activity.activity_repeat = function(activity_name,$scope){
+    if(Activity.activity_equal_activity_name(activity_name)){
+        $scope.warning = '活动名称重复';
+    }
+};
+
+Activity.create_activity = function(activity_name,$location){
+    if(!Activity.activity_equal_activity_name(activity_name)){
+        Activity.create_activity_success(activity_name);
+        $location.path('/create_sign_up');
+    }
+};
