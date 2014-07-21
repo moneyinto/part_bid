@@ -108,3 +108,28 @@ Bidding.bidding_success_people_message = function (people_list, bidInformation) 
         return num.price == Bidding.bidding_success(bidInformation).bidPrice
     })
 };
+
+Bidding.bidding_pop = function(success,$scope){
+    if (success) {
+        $('#alert').modal('show');
+        $scope.bidResult1 = "竞价结果：" + success.name + "电话：" + success.phone + "竞价：￥" + success.price;
+        Bidding.bidding_pop_hide($scope);
+        Bidding.bidding_information($scope,success);
+    }
+};
+
+Bidding.bidding_pop_hide = function($scope){
+    setTimeout(function () {
+        $scope.$apply(function () {
+            $('#alert').modal('hide');
+        });
+    }, 3000);
+};
+
+Bidding.bidding_information = function($scope,success){
+    setTimeout(function () {
+        $scope.$apply(function () {
+            $scope.bidResult = "竞价结果：" + success.name + "电话：" + success.phone + "竞价：￥" + success.price;
+        });
+    }, 3000);
+};

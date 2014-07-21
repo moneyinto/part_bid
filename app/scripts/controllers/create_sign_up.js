@@ -26,7 +26,7 @@ angular.module('card1App')
         };
 
         $scope.refresh = function () {
-            var activities =  getData('activities');
+//            var activities =  getData('activities');
             var peopleList = Activity.activity_equal_activityName(activities).peopleList || [];
             $scope.peopleList = peopleList;
             $scope.peopleCount = peopleList.length;

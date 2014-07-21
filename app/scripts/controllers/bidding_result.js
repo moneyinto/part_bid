@@ -28,20 +28,7 @@ angular.module('card1App')
 
         setData('success', success);
 
-        if (success) {
-            $('#alert').modal('show');
-            $scope.bidResult1 = "竞价结果：" + success.name + "电话：" + success.phone + "竞价：￥" + success.price;
-            setTimeout(function () {
-                $scope.$apply(function () {
-                    $('#alert').modal('hide');
-                });
-            }, 3000);
-            setTimeout(function () {
-                $scope.$apply(function () {
-                    $scope.bidResult = "竞价结果：" + success.name + "电话：" + success.phone + "竞价：￥" + success.price;
-                });
-            }, 3000);
-        }
+        Bidding.bidding_pop(success,$scope);
 
         $scope.bidName = bidList[0].name;
         $scope.bidCount = bidInformation.length;
