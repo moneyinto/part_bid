@@ -1,3 +1,6 @@
+
+
+
 bid_sign_up_refresh = function(){
     var bidSignUp = document.getElementById("bidSignUp");
     if (bidSignUp) {
