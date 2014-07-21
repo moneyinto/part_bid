@@ -14,25 +14,15 @@ angular.module('card1App')
         };
 
         var bidList = getData('bidList');
-        var bidInformation = bidList[0].bidInformation;
+        var bidInformation = bidList[0].bidInformation || [];
         var priceCount = getData('priceCount');
         var success = JSON.parse(localStorage.success);
+
         if (success) {
-            $scope.bidResult = "竞价结果：";
-            $scope.phone = "电话：";
-            $scope.price = "竞价：￥";
-            $scope.sucessName = success.name;
-            $scope.sucessPhone = success.phone;
-            $scope.sucessPrice = success.price;
+            $scope.bidResult = "竞价结果：" + success.name + "电话：" + success.phone + "竞价：￥" + success.price;
         }
+
         $scope.priceCount = priceCount;
         $scope.bidName = bidList[0].name;
-        if (bidInformation) {
-            $scope.bidCount = bidInformation.length;
-        }
-        if (!bidInformation) {
-            $scope.bidCount = 0;
-        }
-
-
+        $scope.bidCount = bidInformation.length;
     });

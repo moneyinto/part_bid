@@ -11,22 +11,21 @@ angular.module('card1App')
         var activities = getData('activities');
         var activityName = getData('activityName');
         var bidList = getData('bidList');
-        if (Bidding.bidding_start_status(bidList)) {
-            $scope.colorStatus = 0;
-        }
-        if (!Bidding.bidding_start_status(bidList)) {
-            $scope.colorStatus = 1;
-        }
+
+        $scope.colorStatus = Bidding.bidding_start_status(bidList) ? 0 : 1;
 
         if (activity_start_status(activities)) {
             $scope.status = 0;
         }
+
         $scope.back_to_activity_list = function () {
             $location.path('/activity_list');
         };
+
         $scope.go_to_bidding_sign_up = function (bid) {
             setData('bidName', bid.name);
         };
+
         $scope.start = function () {
             Bidding.bidding_create(bidList,activityName);
             $location.path('/bidding_sign_up');

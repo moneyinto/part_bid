@@ -24,7 +24,7 @@ Bidding.bidding_sign_up_end_status = function(bidList,bid_name,activityName){
     return _.find(bidList,function(num){ return num.name == bid_name && num.activityName == activityName}).colorStatus;
 };
 
-Bidding.end_sucess = function(bidList){
+Bidding.end_success = function(bidList){
     bidList[0].colorStatus = 1;
     localStorage.removeItem('bidName');
     setData('bidList',bidList);
@@ -50,7 +50,7 @@ Bidding.bidPrice_sort = function(bidInformation){
 
 Bidding.bidPhone_equal_peoplePhone = function(bidInformation,activities,activityName,people_list){
     _.map(Bidding.bidPrice_sort(bidInformation),function(infor){
-        var list = _.find(Activity.activity_enqul_activityName(activities,activityName).peopleList, function (num) {
+        var list = _.find(Activity.activity_equal_activityName(activities,activityName).peopleList, function (num) {
             return num.personPhone == infor.bidPhone
         });
         people_list.push({'name': list.personName, 'phone': list.personPhone, 'price': infor.bidPrice});

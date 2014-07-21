@@ -9,6 +9,7 @@ angular.module('card1App')
         ];
         var activities = getData('activities');
         var bidList = getData('bidList');
+
         if(Activity.go_to_create_activity(activities)){
             $location.path('/create_activity');
         }

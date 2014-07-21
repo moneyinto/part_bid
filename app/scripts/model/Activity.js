@@ -20,11 +20,11 @@ Activity.yellow_when_bidding_start = function(activities,bidList){
     return activities;
 };
 
-Activity.activity_enqul_activityName = function(activities,activityName){
+Activity.activity_equal_activityName = function(activities,activityName){
     return _.find(activities,function(activity){return activity.name == activityName})
 };
 
-Activity.create_activity_sucess = function(activities,activityName){
+Activity.create_activity_success = function(activities,activityName){
     activities.unshift({'name' : activityName,'status':1});
     setData('activities',activities);
     setData('activityName',activityName);
