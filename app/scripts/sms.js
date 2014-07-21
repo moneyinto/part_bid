@@ -43,7 +43,7 @@ var native_accessor = {
             if (activity_start_status(activities)) {
                 var peopleList = activity_start_status(activities).peopleList || [];
                 activity_sign_up_repeat(peopleList, person_phone, json_message);
-                activity_sign_up_sucess(peopleList, activities, person_name, person_phone, json_message);
+                activity_sign_up_success(peopleList, activities, person_name, person_phone, json_message);
                 activity_sign_up_refresh();
             }
             activity_sign_up_fail(activities, json_message);

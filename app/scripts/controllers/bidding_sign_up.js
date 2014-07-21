@@ -27,17 +27,10 @@ angular.module('card1App')
         };
 
         $scope.fresh = function () {
-            var bidList = getData('bidList');
-            var activities = getData('activities');
-            var activityName = getData('activityName');
-            var bid_name = getData('bidName');
-            $scope.bidName = Bidding.bidName_equal_activityName(bidList,activityName,bid_name).name;
-            var bidInformation = Bidding.bidName_equal_activityName(bidList,activityName,bid_name).bidInformation || [];
+            $scope.bidName = Bidding.bidName_equal_activityName().name;
+            var bidInformation = Bidding.bidName_equal_activityName().bidInformation || [];
             $scope.bidCount = bidInformation.length;
-            var peopleList = Activity.activity_equal_activityName(activities,activityName).peopleList;
-            var bidPeople = [];
-            Bidding.get_bidPrice(bidList,activityName,bid_name,peopleList,bidPeople);
-            $scope.bidPeople = bidPeople;
+            $scope.bidPeople = Bidding.get_bidPeople();
         };
 
         $scope.fresh();

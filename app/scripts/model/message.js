@@ -21,12 +21,10 @@ activity_sign_up_refresh = function(){
     }
 };
 
-activity_start_status = function(){
-    var activities = getData('activities');
+activity_start_status = function(activities){
     return _.find(activities, function (activity) {
         return activity.status == 0
     });
-
 };
 
 activity_phone_repeat = function(peopleList,person_phone){

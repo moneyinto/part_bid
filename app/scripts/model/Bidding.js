@@ -40,13 +40,16 @@ Bidding.end_success = function (bidList) {
     setData('bidList', bidList);
 };
 
-Bidding.bidName_equal_activityName = function (bidList, activityName, bid_name) {
+Bidding.bidName_equal_activityName = function () {
+    var bidList = getData('bidList');
+    var activityName = getData('activityName');
+    var bid_name = getData('bidName');
     return _.find(bidList, function (num) {
         return num.name == bid_name && num.activityName == activityName
     })
 };
 
-Bidding.get_bidPrice = function (bidList, activityName, bid_name, peopleList, bidPeople) {
+Bidding.get_bidPrice = function(bidList, activityName, bid_name,peopleList,bidPeople){
     _.map(Bidding.bidName_equal_activityName(bidList, activityName, bid_name).bidInformation, function (infor) {
         var bidPhone = infor.bidPhone;
         var personInformation = _.find(peopleList, function (num) {
@@ -54,6 +57,17 @@ Bidding.get_bidPrice = function (bidList, activityName, bid_name, peopleList, bi
         });
         bidPeople.push(personInformation);
     });
+};
+
+Bidding.get_bidPeople = function () {
+    var bidList = getData('bidList');
+    var activityName = getData('activityName');
+    var bid_name = getData('bidName');
+    var activities = getData('activities');
+    var peopleList = Activity.activity_equal_activityName(activities).peopleList;
+    var bidPeople = [];
+    Bidding.get_bidPrice(bidList, activityName, bid_name,peopleList,bidPeople);
+    return bidPeople;
 };
 
 Bidding.bidPrice_sort = function (bidInformation) {
