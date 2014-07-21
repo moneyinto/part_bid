@@ -19,11 +19,7 @@ angular.module('card1App')
         };
 
         $scope.end = function(){
-            var bidList = getData('bidList');
-            if(confirm("确定要结束本次竞价？")){
-                Bidding.end_success(bidList);
-                $location.path('bidding_result');
-            }
+            Bidding.bidding_sign_up_end($location);
         };
 
         $scope.fresh = function () {

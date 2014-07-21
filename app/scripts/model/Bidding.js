@@ -133,3 +133,11 @@ Bidding.bidding_information = function($scope,success){
         });
     }, 3000);
 };
+
+Bidding.bidding_sign_up_end = function($location){
+    var bidList = getData('bidList');
+    if(confirm("确定要结束本次竞价？")){
+        Bidding.end_success(bidList);
+        $location.path('bidding_result');
+    }
+};
